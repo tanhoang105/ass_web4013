@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('menh_gia');
             $table->integer('chuyen_bay_id');
             $table->date('ngay_het_han');
+            $table->tinyInteger('trash_giam_gia')->default(0);
             $table->timestamps();
         });
     }
