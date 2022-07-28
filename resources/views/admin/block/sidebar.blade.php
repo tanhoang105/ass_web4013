@@ -13,23 +13,15 @@
             </ul>
 
         </li>
-        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+        <li><a class="has-arrow " href=" {{ route('route_BE_Admin_List_Loai_May_Bay') }} " aria-expanded="false">
                 <i class="bi bi-book"></i>
 
                 <span class="nav-text">Hãng Bay</span>
             </a>
-            <ul aria-expanded="false">
-                <li><a href="courses.html">Việt Nam Airline</a></li>
-                <li><a href="course-details-1.html">VIETJET AIR</a></li>
-                <li><a href="course-details-2.html">PACIFIC AIRLINES </a></li>
-                <li><a href="course-details-2.html">BAMBOO AIRWAYS </a></li>
-                <li><a href="course-details-2.html">VIETSTAR AIRLINES </a></li>
-                <li><a href="course-details-2.html">JETSTAR AIRWAYS</a></li>
-
-            </ul>
+           
 
         </li>
-        <li><a class="has-arrow " href="{{route('route_BE_Admin_List_May_Bay')}}" aria-expanded="false">
+        <li><a class="has-arrow " href="{{ route('route_BE_Admin_List_May_Bay') }}" aria-expanded="false">
                 <i class="bi bi-people"></i>
 
                 <span class="nav-text">Máy Bay</span>
@@ -93,11 +85,11 @@
         </li>
 
         <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
-            <i class="bi bi-info-circle"></i>
-            <span class="nav-text">Sân bay</span>
-        </a>
-      
-    </li>
+                <i class="bi bi-info-circle"></i>
+                <span class="nav-text">Sân bay</span>
+            </a>
+
+        </li>
 
 
 

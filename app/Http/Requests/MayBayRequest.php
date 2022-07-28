@@ -26,7 +26,8 @@ class MayBayRequest extends FormRequest
     {
 
         $rules = [];
-        $ActionCurrent  = $this->route()->getActionMethod();
+        $ActionCurrent  = $this->route()->getActionMethod(); // trả về method đang hoạt động 
+
         switch ($this->method()) {
             case 'POST':
                     switch ($ActionCurrent) {

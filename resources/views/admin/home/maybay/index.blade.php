@@ -132,7 +132,7 @@
                                         <th scope="row">{{ $key + 1 }}</th>
                                         <td>{{ $item->so_hieu_mb }}</td>
                                         <td>{{ $item->ten_loai_mb }}</td>
-                                        <td>{{ $item->anh_mb }}</td>
+                                        <td><img src="{{ asset('assets/admin/img_maybay/') .  $item->anh_mb }}" alt="đang cập nhập"></td>
                                         <td>{{ $item->mo_ta_mb }}</td>
 
                                         <td>
