@@ -84,4 +84,57 @@ class LoaiMayBayController extends Controller
 
         return view('admin.home.loaimaybay.add', $this->v);
     }
+
+
+    public function detail_Loai_MB($id , Request $request){
+        $request->session()->put('id' , $id);
+        $this->v['title_page'] = 'Chi tiết hãng máy bay';
+        $detail_loai_mb = $this->loai_mb->detail_loai_mb($id);
+        $this->v['detail_loai_mb'] = $detail_loai_mb;
+        return view('admin.home.loaimaybay.detail' , $this->v);
+    }
+
+    public function update_Loai_MB(LoaiMayBayRequest $request){
+        $id = session('id');
+        if(empty($id)){
+            Session::flash('error' , 'Cập nhập thất bại');
+            return redirect()->route('route_BE_Admin_Detail_Loai_May_Bay');
+        }
+       
+        if($request->file('anh_loai_mb')){
+            $file = $request->file('anh_loai_mb');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('/assets/admin/img_loai_mb'), $filename);
+        }
+
+        $params = [];
+        // dd($request->post());
+        $params['cols'] = array_map(function ($item) {
+            // lọc sạch dữ liệu không có cx đc
+            if ($item == '') {
+                $item = null;
+            }
+            if (is_string($item)) {
+                $item = trim($item);
+            }
+            return $item;
+        }, $request->post());
+        unset($params['cols']['_token']);
+        if(!empty($filename)){
+            $res = $this->loai_mb->update_loai_mb($id  , $params , $filename);
+        }else {
+            // cập nhập khi không có ảnh
+            $res = $this->loai_mb->update_loai_mb($id , $params);
+           
+        }
+
+        if($res > 0) {
+            Session::flash('success' , 'Cập nhập thành công');
+            return redirect()->route('route_BE_Admin_List_Loai_May_Bay');
+        }else{
+            Session::flash('error' , 'Cập nhập không thành công');
+            return back();
+        }
+        
+    }
 }

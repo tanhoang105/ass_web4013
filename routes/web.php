@@ -41,6 +41,9 @@ Route::post('/admin-update-may-bay' , [MaybayController::class , 'update_MayBay'
 Route::get('/admin-list-loai-may-bay' , [LoaiMayBayController::class , 'index'])->name('route_BE_Admin_List_Loai_May_Bay');
 Route::get('/admin-delete-loai-may-bay/{id} ' , [LoaiMayBayController::class , 'delete_Loai_MB'] )->name('route_BE_Admin_Delete_Loai_May_Bay');
 Route::match(['get' , 'post'] , '/admin-add-loai-may-bay' , [LoaiMayBayController::class , 'add_Loai_MB'])->name('route_BE_Admin_Add_Loai_May_Bay');
+Route::get('/admin-detail-loai-may-bay/{id}' ,[LoaiMayBayController::class , 'detail_Loai_MB'] )->name('route_BE_Admin_Detail_Loai_May_Bay');
+Route::post('/admin-update-loai-may-bay' ,[LoaiMayBayController::class , 'update_Loai_MB'] )->name('route_BE_Admin_Update_Loai_May_Bay');
+
 
 // client
 Route::get('/' , [ClientController::class , 'index'])->name('client-index');

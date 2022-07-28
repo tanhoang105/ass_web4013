@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\CssSelector\Node\FunctionNode;
 
 class Loai_mb extends Model
 {
@@ -70,6 +71,36 @@ class Loai_mb extends Model
         $query = DB::table($this->table)
             ->insertGetId($data);
 
+        return $query;
+    }
+
+    public function detail_loai_mb($id)
+    {
+        $query =  DB::table($this->table)
+            ->where('id', '=', $id)
+            ->first();
+        return $query;
+    }
+
+    public function update_loai_mb($id, $param, $filename = null)
+    {
+        if (!empty($filename)) {
+            $data = array_merge($param['cols'], [
+                'updated_at' => date('Y-m-d H:i:d'),
+                'anh_loai_mb' => $filename
+
+            ]);
+        } else {
+
+            $data = array_merge($param['cols'], [
+                'updated_at' => date('Y-m-d H:i:d')
+            ]);
+        }
+
+
+        $query =  DB::table($this->table)
+            ->where('id', '=', $id)
+            ->update($data);
         return $query;
     }
 }

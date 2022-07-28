@@ -40,7 +40,7 @@ class LoaiMayBayRequest extends FormRequest
 
                     case 'update_Loai_MB':
                         $rules = [
-                            'ma_loai_mb' =>  'required | min:3 |unique:loai_mb',
+                            'ma_loai_mb' =>  'required | min:3 ',
                             'ten_loai_mb' => 'required | min:3'
                         ];
                         break;

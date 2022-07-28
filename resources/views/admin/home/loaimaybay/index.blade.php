@@ -136,7 +136,7 @@
                                         <td>{{ $item->mo_ta_mb }}</td>
 
                                         <td>
-                                            <a href=" "><button class="btn btn-warning">Chỉnh</button></a>
+                                            <a href="{{route('route_BE_Admin_Detail_Loai_May_Bay' , ['id' => $item->id])}} "><button class="btn btn-warning">Chỉnh</button></a>
                                         </td>
                                         <td><a href=" {{route('route_BE_Admin_Delete_Loai_May_Bay' , ['id'=> $item->id])}}"><button class="btn btn-danger">Xóa</button></a></td>
 
