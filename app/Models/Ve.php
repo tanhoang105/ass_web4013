@@ -13,7 +13,7 @@ class Ve extends Model
     protected $table = 've';
     protected $fillable = ['id', 'ma_ve', 'cb_id', 'so_ghe', 'gia_ve', 'loai_ve', 'khu_hoi', 'mo_ta_ve', 'trash_ve', 'created_at', 'updated_at'];
 
-    public function list_ve($param =  null, $pagination = true, $perPage =  null , $type  = null)
+    public function list_ve($param =  null, $pagination = true, $perPage =  null, $type  = null)
     {
         if (!$pagination) {
 
@@ -22,7 +22,7 @@ class Ve extends Model
                 ->select($this->table . '.*', 'chuyen_bay.*')
                 ->where('trash_ve', '=', 0)
                 ->get();
-            
+
             $list = $query;
         } else {
             $query =  DB::table($this->table)
@@ -30,54 +30,57 @@ class Ve extends Model
                 ->select($this->table . '.*', 'chuyen_bay.*')
                 ->where('trash_ve', '=', 0);
 
-            if(!empty($param['keyword'])){
-                $query = $query->where(function($q) use ( $param){
-                     $q->orwhere('ma_ve' , 'like' , '%' . $param['keyword'] . '%');
-                }); 
-            }    
+            if (!empty($param['keyword'])) {
+                $query = $query->where(function ($q) use ($param) {
+                    $q->orwhere('ma_ve', 'like', '%' . $param['keyword'] . '%');
+                });
+            }
             $list = $query->paginate($perPage);
         }
 
         return $list;
     }
 
-    public function delete_ve($ma_ve){
+    public function delete_ve($ma_ve)
+    {
         $data = [
-            'trash_ve' => 1 ,
+            'trash_ve' => 1,
             'updated_at' => date('Y-m-d H:i:s')
         ];
         $query  = DB::table($this->table)
-                ->where('ma_ve' , '=' , $ma_ve)
-                ->update($data);
-        return $query;   
-
+            ->where('ma_ve', '=', $ma_ve)
+            ->update($data);
+        return $query;
     }
 
-    public function add_ve($param , ){
-        $data = array_merge($param['cols'] , [
+    public function add_ve($param,)
+    {
+        $data = array_merge($param['cols'], [
             'created_at' => date('Y-m-d H:i:s')
         ]);
-        
+
         $query = DB::table($this->table)->insertGetId($data);
         return $query;
     }
 
 
-    public function detail_ve($ma_ve){
-        if(!empty($ma_ve)){
+    public function detail_ve($ma_ve)
+    {
+        if (!empty($ma_ve)) {
             $query = DB::table($this->table)
-                    ->where('ma_ve' , '=' , $ma_ve)
-                    ->first();
-            return $query;        
+                ->where('ma_ve', '=', $ma_ve)
+                ->first();
+            return $query;
         }
     }
-    
 
-    public function update_ve($ma_ve ,$params){
-       
+
+    public function update_ve($ma_ve, $params)
+    {
+
         $dataUpdate = [];
         foreach ($params['cols'] as $colname =>  $val) {
-          
+        
             if (in_array($colname, $this->fillable)) {
                 $dataUpdate[$colname] = (strlen($val) == 0) ? null : $val;
             }
@@ -88,7 +91,4 @@ class Ve extends Model
             ->update($dataUpdate);
         return $res;
     }
-
-
-
 }

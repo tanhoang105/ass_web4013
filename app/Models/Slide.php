@@ -48,4 +48,31 @@ class Slide extends Model
         $query = DB::table($this->table)->insertGetId($data);
         return $query;
     }
+
+    public function detail_slide($id)
+    {
+        $query  =  DB::table($this->table)
+            ->where('id', '=', $id)
+            ->first();
+        $detail = $query;
+        return $detail;
+    }
+
+    public function update_slide($params)
+    {
+        $dataUpdate = [];
+        foreach ($params['cols'] as $colname =>  $val) {
+            if ($params['cols'] == 'id') continue;
+            if (in_array($colname, $this->fillable)) {
+                $dataUpdate[$colname] = (strlen($val) == 0) ? null : $val;
+            }
+        }
+        // dd($params['cols']);
+
+        $res = DB::table($this->table)
+            ->where('id', '=', $params['cols']['id'])
+            ->update($dataUpdate);
+        // dd($res);
+        return $res;
+    }
 }

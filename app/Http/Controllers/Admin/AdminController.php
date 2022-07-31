@@ -134,8 +134,6 @@ class AdminController extends Controller
         }
     }
 
-
-
     public function delete_ChuyenBay($ma_cb)
     {
         $re   =  $this->chuyen_bay->delete_cb($ma_cb);
