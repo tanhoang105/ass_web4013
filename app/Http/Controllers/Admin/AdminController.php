@@ -33,7 +33,7 @@ class AdminController extends Controller
         $this->v['extParams']  = $request->all();
 
 
-        $this->v['list_cb'] = $this->chuyen_bay->list_cb($this->v['extParams'], 5);
+        $this->v['list_cb'] = $this->chuyen_bay->list_cb($this->v['extParams'], true , 5);
 
 
         return view('admin.home.chuyenbay.index', $this->v);
@@ -90,15 +90,16 @@ class AdminController extends Controller
     public function detail_ChuyenBay($ma_cb, Request $request)
     {
 
-        // dd($id);
+        // dd($id); 
         $request->session()->put('ma_cb', $ma_cb);
 
         $this->v['title_page'] =  'Chi tiết chuyến bay';
         $objItem = $this->chuyen_bay->loadOne($ma_cb);
-        $this->v['list_sb'] = $this->san_bay->list_sb();
-        $this->v['list_mb'] = $this->may_bay->list_mb();
+        $this->v['list_sb'] = $this->san_bay->list_sb(null , false);
+        $this->v['list_mb'] = $this->may_bay->list_mb(null , false);
         // dd($objItem->gio_di);
         $this->v['objItem'] = $objItem;
+        // dd($objItem ,123);
         return view('admin.home.chuyenbay.detail', $this->v);
     }
 

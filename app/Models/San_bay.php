@@ -13,7 +13,7 @@ class San_bay extends Model
     protected $fillable  = ['id' , 'ten_sb' , 'dia_chi_sb' , 'anh_sb' , 'mo_ta_sb' , 'loai_sb' , 'trash_sb' , 'created_at' , 'updated_at'];
 
 
-    public function list_sb($param = null, $pagination = false , $perPage = null){
+    public function list_sb($param = null, $pagination = true , $perPage = null){
         if(!$pagination){
 
             $query = DB::table($this->table)->select($this->fillable)->get();

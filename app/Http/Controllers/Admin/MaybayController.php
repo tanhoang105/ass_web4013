@@ -91,7 +91,9 @@ class MaybayController extends Controller
 
     public function detail_MayBay($so_hieu_mb, Request $request)
     {
-        $this->v['title_page'] = 'Chi tiết sản phẩm';
+        // echo 'mạnh';
+        
+        $this->v['title_page'] = 'Chi tiết máy bay';
         $request->session()->put('so_hieu_mb', $so_hieu_mb);
         $this->v['exParam'] = $request->all();
         $this->v['list_loai_mb'] = $this->loai_mb->list_loai_mb($this->v['exParam'], false);

@@ -1,10 +1,8 @@
 @extends('admin.layout')
 @section('css')
-    
 @endsection
 @section('action_form')
-
-    {{route('route_BE_Admin_List_May_Bay')}}
+    {{ route('route_BE_Admin_List_Ve') }}
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -26,8 +24,8 @@
                                     <div class="d-flex align-items-center flex-wrap">
                                         <img src="assets/admin/images/svg/color-palette.svg" alt="">
                                         <div class="flex-1 ms-3">
-                                            <h4>Tổng Chuyến Bay</h4>
-                                            <span>{{ $list_mb->count() }}</span>
+                                            <h4>Tổng Vé Bay</h4>
+                                            <span>{{ $list_ve->count() }}</span>
                                         </div>
                                     </div>
                                     <a href="javascript:void(0);"><i class="las la-angle-right text-primary"></i></a>
@@ -88,7 +86,7 @@
         </div>
         <div class="widget-heading d-flex justify-content-between align-items-center">
             <h3 class="m-0">All Courses</h3>
-            <a href="{{ route('route_BE_Admin_Add_May_Bay') }}" class="btn btn-primary btn-sm">Thêm Máy Bay </a>
+            <a href="{{ route('route_BE_Admin_Add_Ve') }}" class="btn btn-primary btn-sm">Thêm Vé </a>
         </div>
         <div class="row">
             <div class="col-xl-12 col-md-12">
@@ -97,9 +95,9 @@
                         <div class="alert alert-danger alert-dismissible" role="alert">
                             <strong>{{ Session::get('error') }}</strong>
                             {{-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>  --}}
-                             {{-- <span class="sr-only">Close</span>  --}}
-                        </button>
+                            <span aria-hidden="true">&times;</span> --}}
+                            {{-- <span class="sr-only">Close</span> --}}
+                            </button>
                         </div>
                     @endif
 
@@ -109,51 +107,57 @@
                             {{-- <button type="button" class="close d-flex flex-row-reverse" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             <span class="sr-only flex-rigth">Close</span> --}}
-                        </button>
+                            </button>
                         </div>
                     @endif
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th scope="col">STT</th>
-                                <th scope="col">Số Hiệu Bay</th>
-                                <th scope="col">Hãng Bay</th>
-                                <th scope="col">Ảnh Máy Bay</th>
-                                <th scope="col">Mô Tả Bay</th>
+                                <th scope="col">Mã vé</th>
+                                <th scope="col">Chuyến Bay</th>
+                                <th scope="col">Giá vé</th>
+                                <th scope="col">Số ghế</th>
+                                <th scope="col">Loại vé</th>
+                                <th scope="col">Khứ hồi</th>
+                                <th scope="col">Giảm giá </th>
+                                <th scope="col">Mô tả</th>
                                 <th scope="col">Chỉnh</th>
                                 <th scope="col">Xóa</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            @if (!empty($list_mb))
-                                @foreach ($list_mb as $key => $item)
+                            @if (!empty($list_ve))
+                                @foreach ($list_ve as $key => $item)
                                     <tr>
                                         <th scope="row">{{ $key + 1 }}</th>
-                                        <td>{{ $item->so_hieu_mb }}</td>
-                                        <td>{{ $item->ten_loai_mb }}</td>
-                                        <td><img width="100px" src="{{ asset('assets/admin/img_maybay/' . $item->anh_mb) }}" alt="đang cập nhập"></td>
-                                        <td>{{ $item->mo_ta_mb }}</td>
-
+                                        <td>{{ $item->ma_ve }}</td>
+                                        <td>{{ $item->ma_cb }}</td>
+                                        <td>{{ number_format($item->gia_ve, 0, '.', '.') }}</td>
+                                        <td>{{ $item->so_ghe }}</td>
+                                        <td>{{ $item->loai_ve == 0 ? 'Bình thường' : "Hạng sang" }}</td>
+                                        <td>{{ $item->khu_hoi == 0 ? 'vé 1 chiều ' : 'vé 2 chiều' }}</td>
+                                        <td>{{ number_format($item->giam_gia, 0, '.', '.') }}</td>
+                                        <td>{{ $item->mo_ta_ve }}</td>
                                         <td>
-                                            <a href=" {{route('route_BE_Admin_Detail_May_Bay' , ['so_hieu_mb' => $item->so_hieu_mb])}} "><button class="btn btn-warning">Chỉnh</button></a>
+                                            <a href=" {{ route('route_BE_Admin_Detail_Ve', ['ma_ve' => $item->ma_ve]) }} "><button
+                                                    class="btn btn-warning">Chỉnh</button></a>
                                         </td>
-                                        <td><a href=" {{route('route_BE_Admin_Delete_May_Bay' , ['so_hieu_mb' => $item->so_hieu_mb])}} "><button class="btn btn-danger">Xóa</button></a></td>
+                                        <td><a href=" {{ route('route_BE_Admin_Delete_Ve', ['ma_ve' => $item->ma_ve]) }} "><button
+                                                    class="btn btn-danger">Xóa</button></a></td>
 
                                     </tr>
                                 @endforeach
                             @endif
-
                         </tbody>
                     </table>
                 </div>
             </div>
-
-
         </div>
         <div class="">
             <div class="d-flex align-items-center justify-content-between flex-wrap">
-                {{ $list_mb->appends('extParams')->links() }}
+                {{ $list_ve->appends('extParams')->links() }}
             </div>
         </div>
     </div>

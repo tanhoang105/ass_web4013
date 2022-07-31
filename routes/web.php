@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\LoaiMayBayController;
 use App\Http\Controllers\Admin\MaybayController;
+use App\Http\Controllers\Admin\SlideController;
+use App\Http\Controllers\Admin\VeController;
 use App\Http\Controllers\Client\ClientController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,7 +47,28 @@ Route::get('/admin-detail-loai-may-bay/{id}' ,[LoaiMayBayController::class , 'de
 Route::post('/admin-update-loai-may-bay' ,[LoaiMayBayController::class , 'update_Loai_MB'] )->name('route_BE_Admin_Update_Loai_May_Bay');
 
 
+// vé 
+
+Route::get('/admin-list-ve' , [VeController::class , 'index'] )->name('route_BE_Admin_List_Ve');
+Route::get('/admin-delete-ve/{ma_ve}' , [VeController::class , 'delete_Ve'] )->name('route_BE_Admin_Delete_Ve');
+Route::match(['get' , 'post'] , '/admin-add-ve' , [VeController::class , 'add_Ve'])->name('route_BE_Admin_Add_Ve');
+Route::get('/admin-detail-ve/{ma_ve}' , [VeController::class ,  'detail_Ve'])->name('route_BE_Admin_Detail_Ve');
+Route::post('/admin-update-ve' , [VeController::class  , 'update_Ve'])->name('route_BE_Admin_Update_Ve');
+
+
+//slide 
+Route::get('/admin-list-slide' , [SlideController::class , 'index'])->name('route_BE_Admin_List_Slide');
+Route::get('/admin-delete-slide/{id}' , [SlideController::class , 'delete_Slide'])->name('route_BE_Admin_Delete_Slide');
+Route::match(['get' , 'post'] , '/admin-add-slide' , [SlideController::class , 'add_Slide'])->name('route_BE_Admin_Add_Slide');
+Route::get('/admin-detail-slide/{id}',[SlideController::class, 'detail_Slide' ])->name('route_BE_Admin_Detail_Slide');
+Route::post('/admin-update-slide' , [SlideController::class , 'update_Slide'])->name('route_BE_Admin_Update_Slide');
+
+
+
+
+
 // client
+
 Route::get('/' , [ClientController::class , 'index'])->name('client-index');
 Route::get('/about' , [ClientController::class , 'about'])->name('about');
 Route::get('/contact' , [ClientController::class , 'contact'])->name('contact');
