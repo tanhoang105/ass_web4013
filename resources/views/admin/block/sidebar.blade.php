@@ -48,16 +48,20 @@
 
     </li>
 
+    <li><a class="has-arrow " href="{{ route('route_BE_Admin_List_Dat_Ve') }}" aria-expanded="false">
+        <i class="bi bi-pie-chart"></i>
+        <span class="nav-text">Đặt Vé
+        </span>
+    </a>
 
-    <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+</li>
+
+
+    <li><a class="has-arrow " href=" {{route('route_BE_Admin_List_Tai_Khoan')}} " aria-expanded="false">
             <i class="bi bi-info-circle"></i>
             <span class="nav-text">Tài Khoản</span>
         </a>
-        <ul aria-expanded="false">
-            <li><a href="app-profile.html">Nhân Viên</a></li>
-            <li><a href="post-details.html">Me</a></li>
-
-        </ul>
+       
     </li>
 
     <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">

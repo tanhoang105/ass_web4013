@@ -52,8 +52,8 @@
                              <ul>
                                  <li class="country"><a href="#">usd <img src="assets/img/icon/united-states.png" alt=""></a></li>
                                  <li class="question"><a href="contact.html">?</a></li>
-                                 <li class="header-btn"><a href="contact.html" class="btn">Register</a></li>
-                                 <li class="header-btn sign-in"><a href="contact.html" class="btn">Sign In</a></li>
+                                 <li class="header-btn"><a href="{{route('route_BE_SignIn')}}" class="btn">Register</a></li>
+                                 <li class="header-btn sign-in"><a href="{{route('login')}}" class="btn">Sign In</a></li>
                              </ul>
                          </div>
                      </nav>

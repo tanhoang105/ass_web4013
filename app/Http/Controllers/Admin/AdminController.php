@@ -33,7 +33,7 @@ class AdminController extends Controller
         $this->v['extParams']  = $request->all();
 
 
-        $this->v['list_cb'] = $this->chuyen_bay->list_cb($this->v['extParams'], true , 5);
+        $this->v['list_cb'] = $this->chuyen_bay->list_cb($this->v['extParams'], true , 4);
 
 
         return view('admin.home.chuyenbay.index', $this->v);
