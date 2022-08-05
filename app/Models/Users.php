@@ -47,13 +47,13 @@ class Users extends Model
     }
 
 
-    public function delete_user($email){
-       
-        if(!empty($email)){
+    public function delete_user($email)
+    {
+
+        if (!empty($email)) {
             $query = DB::table($this->table)
-                    ->where('email' , '=' , $email)
-                    ->delete();
-                    
+                ->where('email', '=', $email)
+                ->delete();
         }
         return $query;
     }
@@ -74,7 +74,7 @@ class Users extends Model
     {
         $dataUpdate = [];
         foreach ($params['cols'] as $colname =>  $val) {
-            if ($params['cols'] == 'id') continue;
+            if ($params['cols'] =='id' ) continue;
             if (in_array($colname, $this->fillable)) {
                 $dataUpdate[$colname] = (strlen($val) == 0) ? null : $val;
             }

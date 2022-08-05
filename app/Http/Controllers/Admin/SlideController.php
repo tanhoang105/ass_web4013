@@ -106,6 +106,7 @@ class SlideController extends Controller
             $file = $request->file('anh_slide');
             $filename = date('YmdHi') . $file->getClientOriginalName();
             $file->move(public_path('/assets/admin/img_slide'), $filename);
+            
         }
 
         $params['cols'] = array_map(function ($item) {

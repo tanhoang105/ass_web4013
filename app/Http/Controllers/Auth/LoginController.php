@@ -88,9 +88,9 @@ class LoginController extends Controller
         return view('login.quen_mk');
     }
 
-    public function getLogout()
+    public function Logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect()->route('client-index');
     }
 }

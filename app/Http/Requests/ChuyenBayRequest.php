@@ -53,6 +53,19 @@ class ChuyenBayRequest extends FormRequest
 
                         break;
 
+                    case 'update_ChuyenBay':
+
+                        $rules = [
+                            'ma_cb' =>  'required | min:3', 
+                            'sb_id' => 'required',
+                            'gio_di' => 'required',
+                            'gio_den' => 'required',
+                            'mb_id' => 'required',
+
+                        ];
+
+                        break;
+
                     default:
 
                         break;

@@ -1,14 +1,17 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\DatVeController;
 use App\Http\Controllers\Admin\LoaiMayBayController;
 use App\Http\Controllers\Admin\MaybayController;
+use App\Http\Controllers\Admin\SanBayController;
 use App\Http\Controllers\Admin\SlideController;
 use App\Http\Controllers\Admin\TaiKhoanController;
 use App\Http\Controllers\Admin\VeController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Client\ClientController;
 use App\Models\Role;
+use App\Models\San_bay;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,20 +33,19 @@ Route::post('/login', [LoginController::class, 'postLogin']);
 Route::match(['get', 'post'], '/dang-ky', [LoginController::class, 'add_User'])->name('route_BE_SignIn');
 Route::get('/quen-mat-khau', [LoginController::class, 'quen_MK'])->name('route_BE_Forgot_Password');
 
+Route::get('/logout', [LoginController::class, 'Logout'])->name('route_logout');
+
 
 // admin
 
 Route::middleware(['auth'])->group(function () {
 
      Route::get('/admin', [AdminController::class, 'index'])->name('admin-index');
-
-
      // chuyến bay
      Route::match(['get', 'post'], '/admin-add-chuyen-bay', [AdminController::class, 'add_ChuyenBay'])->name('route_BE_Admin_Add_Chuyen_Bay');
      Route::get('/admin-detail-chuyen-bay/{ma_cb}', [AdminController::class, 'detail_ChuyenBay'])->name('route_BE_Admin_Detail_Chuyen_Bay');
      Route::post('/admin-update-chuyen-bay', [AdminController::class, 'edit_ChuyenBay'])->name('route_BE_Admin_Update_Chuyen_Bay');
      Route::get('/admin-delete-chuyen-bay/{ma_cb}', [AdminController::class, 'delete_ChuyenBay'])->name('route_BE_Admin_Delete_Chuyen_Bay');
-
 
      // máy bay
      Route::get('/admin-list-may-bay', [MaybayController::class, 'index'])->name('route_BE_Admin_List_May_Bay');
@@ -53,14 +55,11 @@ Route::middleware(['auth'])->group(function () {
      Route::post('/admin-update-may-bay', [MaybayController::class, 'update_MayBay'])->name('route_BE_Admin_Update_May_Bay');
 
      //loại máy bay
-
      Route::get('/admin-list-loai-may-bay', [LoaiMayBayController::class, 'index'])->name('route_BE_Admin_List_Loai_May_Bay');
      Route::get('/admin-delete-loai-may-bay/{id} ', [LoaiMayBayController::class, 'delete_Loai_MB'])->name('route_BE_Admin_Delete_Loai_May_Bay');
      Route::match(['get', 'post'], '/admin-add-loai-may-bay', [LoaiMayBayController::class, 'add_Loai_MB'])->name('route_BE_Admin_Add_Loai_May_Bay');
      Route::get('/admin-detail-loai-may-bay/{id}', [LoaiMayBayController::class, 'detail_Loai_MB'])->name('route_BE_Admin_Detail_Loai_May_Bay');
      Route::post('/admin-update-loai-may-bay', [LoaiMayBayController::class, 'update_Loai_MB'])->name('route_BE_Admin_Update_Loai_May_Bay');
-
-
      // vé 
 
      Route::get('/admin-list-ve', [VeController::class, 'index'])->name('route_BE_Admin_List_Ve');
@@ -68,8 +67,6 @@ Route::middleware(['auth'])->group(function () {
      Route::match(['get', 'post'], '/admin-add-ve', [VeController::class, 'add_Ve'])->name('route_BE_Admin_Add_Ve');
      Route::get('/admin-detail-ve/{ma_ve}', [VeController::class,  'detail_Ve'])->name('route_BE_Admin_Detail_Ve');
      Route::post('/admin-update-ve', [VeController::class, 'update_Ve'])->name('route_BE_Admin_Update_Ve');
-
-
      //slide 
      Route::get('/admin-list-slide', [SlideController::class, 'index'])->name('route_BE_Admin_List_Slide');
      Route::get('/admin-delete-slide/{id}', [SlideController::class, 'delete_Slide'])->name('route_BE_Admin_Delete_Slide');
@@ -77,11 +74,19 @@ Route::middleware(['auth'])->group(function () {
      Route::get('/admin-detail-slide/{id}', [SlideController::class, 'detail_Slide'])->name('route_BE_Admin_Detail_Slide');
      Route::post('/admin-update-slide', [SlideController::class, 'update_Slide'])->name('route_BE_Admin_Update_Slide');
 
+     //update tài khoản admin
+
+     Route::get('admin-update-account/{id}', [TaiKhoanController::class, 'admin_Update_Account'])->name('route_BE_Admin_Update_Account');
+     Route::post('admin-update-account', [TaiKhoanController::class, 'admin_Update_Account_Post'])->name('route_BE_Admin_Update_Account_Post');
 
      // đặt vé
-     Route::get('/admin-list-dat-ve')->name('route_BE_Admin_List_Dat_Ve');
+     Route::get('/admin-list-dat-ve', [DatVeController::class, 'index'])->name('route_BE_Admin_List_Dat_Ve');
+     Route::get('/admin-delete-dat-ve/{ma_ve}', [DatVeController::class, 'delete_Dat_Ve'])->name('route_BE_Admin_Delete_Dat_Ve');
+     Route::match(['get', 'post'], 'admin-add-dat-ve', [DatVeController::class, 'add_Dat_ve'])->name('route_BE_Admin_Add_Dat_Ve');
+     Route::get('/admin-detail-dat-ve', [DatVeController::class, 'detail_Dat_Ve'])->name('route_BE_Detail_Dat_Ve');
+     Route::post('/admin-update-dat-ve', [DatVeController::class, 'update_Dat_Ve'])->name('route_BE_Admin_Dat_Ve');
 
-
+     // u
 
 
 
@@ -91,6 +96,16 @@ Route::middleware(['auth'])->group(function () {
      Route::get('/admin-delete-tai-khoan/{email}', [TaiKhoanController::class, 'delete_TaiKhoan'])->name('route_BE_Admin_Delete_Tai_Khoan');
      Route::get('/admin-detail-tai-khoan/{email}', [TaiKhoanController::class, 'detail_TaiKhoan'])->name('route_BE_Admin_Detail_Tai_Khoan');
 
+
+
+     // sân bay
+
+     Route::get('/admin-list-san-bay',  [SanBayController::class, 'index'])->name('route_BE_Admin_List_San_Bay');
+     Route::get('/admin-delte-san-bay/{id}',  [SanBayController::class, 'delete_SanBay'])->name('route_BE_Admin_Delete_San_Bay');
+     Route::match(['get' , 'post'], '/admin-add-san-bay' , [SanBayController::class , 'add_SanBay'])->name('route_BE_Admin_Add_San_Bay');
+     Route::get('/add-detail-san-bay/{id}' , [SanBayController::class , 'detail_SanBay'])->name('route_BE_Admin_Detail_San_Bay');
+     Route::post('/admin-update-san-bay', [SanBayController::class , 'update_SanBay'])->name('route_BE_Admin_Update_San_Bay');
+     
 });
 
 

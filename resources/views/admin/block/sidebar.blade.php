@@ -1,3 +1,6 @@
+@php
+$objItem = \Illuminate\Support\Facades\Auth::user();
+@endphp
 <div class="dlabnav-scroll">
     <ul class="metismenu" id="menu">
         <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
@@ -49,22 +52,22 @@
     </li>
 
     <li><a class="has-arrow " href="{{ route('route_BE_Admin_List_Dat_Ve') }}" aria-expanded="false">
-        <i class="bi bi-pie-chart"></i>
-        <span class="nav-text">Đặt Vé
-        </span>
-    </a>
+            <i class="bi bi-pie-chart"></i>
+            <span class="nav-text">Đặt Vé
+            </span>
+        </a>
 
-</li>
+    </li>
 
 
-    <li><a class="has-arrow " href=" {{route('route_BE_Admin_List_Tai_Khoan')}} " aria-expanded="false">
+    <li><a class="has-arrow " href=" {{ route('route_BE_Admin_List_Tai_Khoan') }} " aria-expanded="false">
             <i class="bi bi-info-circle"></i>
             <span class="nav-text">Tài Khoản</span>
         </a>
-       
+
     </li>
 
-    <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+    <li><a class="has-arrow " href="{{ route('route_BE_Admin_List_San_Bay') }}" aria-expanded="false">
             <i class="bi bi-info-circle"></i>
             <span class="nav-text">Sân bay</span>
         </a>
@@ -80,7 +83,7 @@
             <img src="assets/admin/images/medal.png" alt="">
         </div>
         <p>Upgrade to premium to get premium features</p>
-        <a href="javascript:void(0);" class="btn btn-primary btn-sm">Upgrade</a>
+        <a href=" {{ route('route_BE_Admin_Update_Account' , ['id'=>$objItem->id]) }} " class="btn btn-primary btn-sm">Upgrade</a>
     </div>
     <div class="copyright">
         <p><strong>GetSkills Online Learning Admin</strong> © 2022 All Rights Reserved</p>

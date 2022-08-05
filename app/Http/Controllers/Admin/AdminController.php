@@ -44,8 +44,8 @@ class AdminController extends Controller
 
         $title_page = 'Trang thêm chuyến bay';
         $this->v['extParams']  = $request->all();
-        $this->v['list_sb'] = $this->san_bay->list_sb($this->v['extParams']);
-        $this->v['list_mb'] = $this->may_bay->list_mb($this->v['extParams'] , false);
+        $this->v['list_sb'] = $this->san_bay->list_sb($this->v['extParams'] , false);
+        $this->v['list_mb'] = $this->may_bay->list_mb($this->v['extParams'] , false );
         // dd($this->v['list_sb']);
         $this->v['title_page'] = $title_page;
 
