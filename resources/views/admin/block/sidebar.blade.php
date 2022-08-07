@@ -3,17 +3,11 @@ $objItem = \Illuminate\Support\Facades\Auth::user();
 @endphp
 <div class="dlabnav-scroll">
     <ul class="metismenu" id="menu">
-        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+        <li><a class="has-arrow " href="{{ route('admin-index') }}" aria-expanded="false">
                 <i class="bi bi-grid"></i>
                 <span class="nav-text">Chuyến Bay</span>
             </a>
-            <ul aria-expanded="false">
-                <li><a href="index.html">Trong Nước</a></li>
-                <li><a href="index-2.html">Quốc Tế</a></li>
-                <li><a href="schedule.html">Chuyến bay 1 chiều</a></li>
-                <li><a href="instructors.html">Chuyến bay 2 chiều</a></li>
 
-            </ul>
 
         </li>
         <li><a class="has-arrow " href=" {{ route('route_BE_Admin_List_Loai_May_Bay') }} " aria-expanded="false">
@@ -83,7 +77,8 @@ $objItem = \Illuminate\Support\Facades\Auth::user();
             <img src="assets/admin/images/medal.png" alt="">
         </div>
         <p>Upgrade to premium to get premium features</p>
-        <a href=" {{ route('route_BE_Admin_Update_Account' , ['id'=>$objItem->id]) }} " class="btn btn-primary btn-sm">Upgrade</a>
+        <a href=" {{ route('route_BE_Admin_Update_Account', ['id' => $objItem->id]) }} "
+            class="btn btn-primary btn-sm">Upgrade</a>
     </div>
     <div class="copyright">
         <p><strong>GetSkills Online Learning Admin</strong> © 2022 All Rights Reserved</p>

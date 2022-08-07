@@ -81,10 +81,10 @@ Route::middleware(['auth'])->group(function () {
 
      // đặt vé
      Route::get('/admin-list-dat-ve', [DatVeController::class, 'index'])->name('route_BE_Admin_List_Dat_Ve');
-     Route::get('/admin-delete-dat-ve/{ma_ve}', [DatVeController::class, 'delete_Dat_Ve'])->name('route_BE_Admin_Delete_Dat_Ve');
+     Route::get('/admin-delete-dat-ve/{ma_dat_ve}', [DatVeController::class, 'delete_Dat_Ve'])->name('route_BE_Admin_Delete_Dat_Ve');
      Route::match(['get', 'post'], 'admin-add-dat-ve', [DatVeController::class, 'add_Dat_ve'])->name('route_BE_Admin_Add_Dat_Ve');
-     Route::get('/admin-detail-dat-ve', [DatVeController::class, 'detail_Dat_Ve'])->name('route_BE_Detail_Dat_Ve');
-     Route::post('/admin-update-dat-ve', [DatVeController::class, 'update_Dat_Ve'])->name('route_BE_Admin_Dat_Ve');
+     Route::get('/admin-detail-dat-ve/{ma_dat_ve}', [DatVeController::class, 'detail_Dat_Ve'])->name('route_BE_Admin_Detail_Dat_Ve');
+     Route::post('/admin-update-dat-ve', [DatVeController::class, 'update_Dat_Ve'])->name('route_BE_Admin_Update_Dat_Ve');
 
      // u
 
