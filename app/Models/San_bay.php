@@ -52,7 +52,7 @@ class San_bay extends Model
     {
         if (!empty($params)) {
             // nếu tồn tại thì thêm
-            $data = array_merge($params['cols'] , [
+            $data = array_merge($params['cols'], [
                 'created_at' => date('Y-m-d h:i:s')
             ]);
             $query = DB::table($this->table)
@@ -60,6 +60,46 @@ class San_bay extends Model
             return $query;
         } else {
             Session::flash('error', 'Dữ liệu không hợp lệ');
+        }
+    }
+
+    public function detail_sanbay($id)
+    {
+        if (!empty($id)) {
+            $query = DB::table($this->table)
+                ->where('id', '=', $id)
+                ->first();
+            return $query;
+        }
+    }
+
+    public function update_sanbay($params)
+    {
+        $dataUpdate = [];
+
+        // kiểm tra và lọc lại dữ liệu 
+        foreach ($params['cols'] as $colname =>  $val) {
+            if ($params['cols'] == 'id') continue;
+            if (in_array($colname, $this->fillable)) {
+                $dataUpdate[$colname] = (strlen($val) == 0) ? null : $val;
+            }
+        }
+
+        // sau khi kiểm tra và lọc dữ liệu
+        $res = DB::table($this->table)
+            ->where('id', '=', $params['cols']['id'])
+            ->update($dataUpdate);
+        // dd($res);
+        return $res;
+    }
+
+    public function delete_sanbay($id)
+    {
+        if (!empty($id)) {
+            $query = DB::table($this->table)
+                ->where('id', '=', $id)
+                ->update(['trash_sb' => 1]);
+            return $query;
         }
     }
 }

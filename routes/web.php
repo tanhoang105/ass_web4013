@@ -101,7 +101,7 @@ Route::middleware(['auth'])->group(function () {
      // sân bay
 
      Route::get('/admin-list-san-bay',  [SanBayController::class, 'index'])->name('route_BE_Admin_List_San_Bay');
-     Route::get('/admin-delte-san-bay/{id}',  [SanBayController::class, 'delete_SanBay'])->name('route_BE_Admin_Delete_San_Bay');
+     Route::get('/admin-delete-san-bay/{id}',  [SanBayController::class, 'delete_SanBay'])->name('route_BE_Admin_Delete_San_Bay');
      Route::match(['get' , 'post'], '/admin-add-san-bay' , [SanBayController::class , 'add_SanBay'])->name('route_BE_Admin_Add_San_Bay');
      Route::get('/add-detail-san-bay/{id}' , [SanBayController::class , 'detail_SanBay'])->name('route_BE_Admin_Detail_San_Bay');
      Route::post('/admin-update-san-bay', [SanBayController::class , 'update_SanBay'])->name('route_BE_Admin_Update_San_Bay');
