@@ -70,9 +70,9 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="" class="form-label">Ảnh máy bay</label><br>
-                        <img src="{{ asset('assets/admin/img_maybay/' . $list_mb->anh_mb) }}" alt="">
-                        <input value="{{ old('anh_mb') }}" type="file" name="anh_mb" class="form-control"
-                            id="">
+                        <img id="anh_mb" src="{{ asset('assets/admin/img_maybay/' . $list_mb->anh_mb) }}" alt="">
+                        <input id="anh_update" value="{{ old('anh_mb') }}" type="file" name="anh_mb" class="form-control"
+                            >
                         @error('anh_mb')
                             <span style="color: red"> {{ $message }} </span>
                         @enderror
@@ -82,3 +82,26 @@
         </form>
     </div>
 @endsection
+
+
+
+@section('js')
+    <script>
+        $(function() {
+            function readURL(input, selector) {
+                if (input.files && input.files[0]) {
+                    let reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $(selector).attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#anh_update").change(function() {
+                readURL(this, '#anh_mb');
+            });
+
+        });
+    </script>

@@ -13,10 +13,11 @@ class LoginController extends Controller
 {
 
     protected $user;
+    protected $v;
     public function __construct()
     {
-
         $this->user =  new Users();
+        $this->v = [];
     }
     public function index()
     {
@@ -34,11 +35,14 @@ class LoginController extends Controller
         // dd($email, $password);
         // 2 là admin 1
         // 1 là nhân viên 
-        if (Auth::attempt(['email' => $email, 'password' => $password, 'role_id' => 2])) {
-            return redirect()->route('admin-index');
+        // 0 là khách hàng
+        if (Auth::attempt(['email' => $email, 'password' => $password, ])) {
+            $account  = Auth::user(); 
+            $this->v['account'] =  $account;
+            return redirect()->route('client-index' , $this->v);
         } else {
             return redirect()->route('login');
-            // dd(000);
+            
         }
     }
 

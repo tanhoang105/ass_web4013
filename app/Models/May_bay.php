@@ -30,7 +30,7 @@ class May_bay extends Model
                     $q->orwhere('so_hieu_mb', 'like', '%' . $param['keyword'] . '%');
                 });
             }
-            $list_mb = $query->paginate($perPage);
+            $list_mb = $query->paginate($perPage)->withQueryString();
         }
 
         // dd($list_sb);

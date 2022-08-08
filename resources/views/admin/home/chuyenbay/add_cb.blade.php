@@ -36,7 +36,7 @@
                          @enderror
 
                      </div>
-                     
+
                      <div class="mb-3">
                          <label for="" class="form-label">Sân bay đi</label>
                          <select name="sb_id" id="" class="form-control">
@@ -44,7 +44,8 @@
 
                              @if (!empty($list_sb))
                                  @foreach ($list_sb as $item)
-                                     <option  value="{{ $item->id ?? old('sb_id') }} ">{{ $item->ten_sb ?? old('ten_sb') }}</option>
+                                     <option value="{{ $item->id ?? old('sb_id') }} ">{{ $item->ten_sb ?? old('ten_sb') }}
+                                     </option>
                                  @endforeach
                              @endif
 
@@ -54,10 +55,10 @@
                          @enderror
 
                          <div class="mb-3">
-                            <label for="" class="form-label">Mô tả chuyến bay</label>
-                            <textarea value="{{ old('mo_ta_cb') }}" class="form-control" name="mo_ta_cb" id=""></textarea>
-   
-                        </div>
+                             <label for="" class="form-label">Mô tả chuyến bay</label>
+                             <textarea value="{{ old('mo_ta_cb') }}" class="form-control" name="mo_ta_cb" id=""></textarea>
+
+                         </div>
 
 
                      </div>
@@ -97,7 +98,15 @@
                          @enderror
                      </div>
 
-                    
+                     <div class="mb-3">
+                         <label for="" class="form-label">Ảnh Chuyến Bay</label>
+                         <input type="file" class="form-control" name="anh_chuyen_bay" id="" >
+                         @error('anh_chuyen_bay')
+                             <span style="color: red"> {{ $message }} </span>
+                         @enderror
+                     </div>
+
+
                  </div>
 
 

@@ -12,42 +12,41 @@ class Chuyen_bay extends Model
 {
     use HasFactory;
     protected $table = 'chuyen_bay';
-    protected $fillable = ['id', 'ma_cb', 'ngay_di', 'sb_id', 'gio_di', 'gio_den', 'mb_id', 'mo_ta_cb', 'trash_cb', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'ma_cb', 'ngay_di', 'sb_id', 'gio_di', 'gio_den', 'mb_id', 'anh_chuyen_bay' , 'mo_ta_cb', 'trash_cb', 'created_at', 'updated_at'];
 
 
-    public function list_cb($param = [], $pagition = true , $perPage = null)
+    public function list_cb($param = [], $pagition = true, $perPage = null)
     {
-        if($pagition) {
+        if ($pagition) {
             // phân trang
             $query = DB::table($this->table)
                 ->join('may_bay', 'may_bay.id', '=', $this->table . '.mb_id')
                 ->join('san_bay', 'san_bay.id', '=', $this->table . '.sb_id')
-                ->select($this->table . '.*', 'san_bay.*' , 'may_bay.*')
+                ->select($this->table . '.*', 'san_bay.*', 'may_bay.*')
                 ->where($this->table . '.trash_cb', '=', 0)
-                ->orderByDesc($this->table. '.id');
-             
-            if (!empty($param['keyword']) ) {
+                ->orderByDesc($this->table . '.id');
+
+            if (!empty($param['keyword'])) {
                 $query  = $query->where(function ($q) use ($param) {
                     $q->orWhere('ma_cb', 'like', '%' . $param['keyword'] . '%');
                 });
             }
-    
-            $list = $query->paginate($perPage);
-        }else  {
-            
+
+            $list = $query->paginate($perPage)->withQueryString();
+        } else {
+
             $query = DB::table($this->table)
                 ->join('may_bay', 'may_bay.id', '=', $this->table . '.mb_id')
                 ->join('san_bay', 'san_bay.id', '=', $this->table . '.sb_id')
-                ->select($this->table . '.*', 'san_bay.*' , 'may_bay.*')
+                ->select($this->table . '.*', 'san_bay.*', 'may_bay.*')
                 ->where($this->table . '.trash_cb', '=', 0)
-                ->orderByDesc($this->table. '.id');
-            if (!empty($param['keyword']) ) {
+                ->orderByDesc($this->table . '.id');
+            if (!empty($param['keyword'])) {
                 $query  = $query->where(function ($q) use ($param) {
                     $q->orWhere('ma_cb', 'like', '%' . $param['keyword'] . '%');
                 });
             }
             $list  =  $query->get();
-    
         }
 
         return $list;
@@ -98,5 +97,13 @@ class Chuyen_bay extends Model
         $query = $query->update($data);
         $cb_delete = $query;
         return  $cb_delete;
+    }
+
+    public function loc_chuyenbay()
+    {
+        $query = DB::table($this->table)
+            ->where('gio_den', '<', date('Y-m-d h:i:s'))
+            ->update(['trash_cb' => 1]);
+        return $query;
     }
 }

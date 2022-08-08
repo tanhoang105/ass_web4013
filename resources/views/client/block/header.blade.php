@@ -55,20 +55,28 @@ $objUser = \Illuminate\Support\Facades\Auth::user();
                         </div>
                         <div class="header-action d-none d-md-block">
                             <ul>
-                                <li class="country"><a href="#">usd <img src="assets/img/icon/united-states.png"
-                                            alt=""></a></li>
-                                <li class="question"><a href="contact.html">?</a></li>
+                               
                                 @if (!isset($objUser))
-                                    <li class="header-btn"><a href="{{ route('route_BE_SignIn') }}"
+                                    <li class="header-btn "><a href="{{ route('route_BE_SignIn') }}"
                                             class="btn">Register</a></li>
-                                    <li class="header-btn sign-in"><a href="{{ route('login') }}" class="btn">LoginIn</a>
+                                    <li class="header-btn sign-in"><a href="{{ route('login') }}"
+                                            class="btn">LoginIn</a>
                                     </li>
                                 @else
-                                    <li class="header-btn"><a href="{{ route('route_BE_SignIn') }}"
-                                            class="btn"> {{$objUser->name}}</a></li>
-                                            <li class="header-btn sign-in"><a href="{{ route('route_logout') }}" class="btn">Logout</a>
-                                        </li>
+                                    <li class="header-btn"><a href="{{ route('route_BE_SignIn') }}" class="btn">
+                                            {{ $objUser->name }}</a></li>
+                                    <li class="header-btn sign-in"><a href="{{ route('route_logout') }}"
+                                            class="btn">Logout</a>
+                                    </li>
+
+                                    @if ($objUser->role_id == 2)
+                                        <li class="header-btn sign-up"><a href="{{ route('admin-index') }}"
+                                                class="btn ">Quản Trị</a></li>
+                                        
+                                    @endif
+
                                 @endif
+
 
 
                             </ul>

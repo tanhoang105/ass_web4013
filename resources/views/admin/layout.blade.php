@@ -147,24 +147,9 @@
     <script src="{{ asset('assets/admin/js/dlabnav-init.js') }}"></script>
     <script src="{{ asset('assets/admin/js/demo.js') }}"></script>
     <script src="{{ asset('assets/admin/js/styleSwitcher.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $(".pagination-down a").on('click', function() {
-                $(".pagination-down a").removeClass("active");
-                $(this).addClass("active");
-            });
-        });
-    </script>
-
-    <script>
-        $('#mo_ta').summernote({
-
-        });
-    </script>
-
-    {{-- @yield('js') --}}
+    @yield('js')
+   
 </body>
 
-<!-- Mirrored from getskills.dexignzone.com/xhtml/courses.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 18 Jul 2022 15:30:48 GMT -->
 
 </html>

@@ -35,7 +35,7 @@ class Ve extends Model
                     $q->orwhere('ma_ve', 'like', '%' . $param['keyword'] . '%');
                 });
             }
-            $list = $query->paginate($perPage);
+            $list = $query->paginate($perPage)->withQueryString();
         }
 
         return $list;

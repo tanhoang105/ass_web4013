@@ -46,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
      Route::get('/admin-detail-chuyen-bay/{ma_cb}', [AdminController::class, 'detail_ChuyenBay'])->name('route_BE_Admin_Detail_Chuyen_Bay');
      Route::post('/admin-update-chuyen-bay', [AdminController::class, 'edit_ChuyenBay'])->name('route_BE_Admin_Update_Chuyen_Bay');
      Route::get('/admin-delete-chuyen-bay/{ma_cb}', [AdminController::class, 'delete_ChuyenBay'])->name('route_BE_Admin_Delete_Chuyen_Bay');
+     Route::get('/admin-loc-chuyen-bay', [AdminController::class, 'loc_ChuyenBay'])->name('route_BE_Admin_Loc_Chuyen_Bay');
+     // lọc chuyến bay quá thời gian 
 
      // máy bay
      Route::get('/admin-list-may-bay', [MaybayController::class, 'index'])->name('route_BE_Admin_List_May_Bay');

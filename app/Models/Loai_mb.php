@@ -36,7 +36,7 @@ class Loai_mb extends Model
                     $q->orwhere('ten_loai_mb', 'like', '%' . $param['keyword'] . '%');
                 });
             }
-            $list_loai_mb =  $query->paginate($perPage);
+            $list_loai_mb =  $query->paginate($perPage)->withQueryString();
         }
         return $list_loai_mb;
     }

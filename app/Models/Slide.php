@@ -22,7 +22,7 @@ class Slide extends Model
                 $q->orwhere('ten_slide', 'like', '%' . $params['keyword'] . '%');
             });
         }
-        $list  = $query->paginate($perpage);
+        $list  = $query->paginate($perpage)->withQueryString();
         return $list;
     }
 

@@ -27,7 +27,7 @@ class Users extends Model
                     $q->orwhere($this->table . '.name', 'like', '%'  . $params['keyword'] . '%');
                 });
             }
-            $list = $query->paginate($perpage);
+            $list = $query->paginate($perpage)->withQueryString();
         } else {
             $query =  DB::table($this->table)
                 ->join('roles', 'roles.id', '=', $this->table . '.role_id')

@@ -56,7 +56,7 @@ class ChuyenBayRequest extends FormRequest
                     case 'update_ChuyenBay':
 
                         $rules = [
-                            'ma_cb' =>  'required | min:3', 
+                            'ma_cb' =>  'required | min:3',
                             'sb_id' => 'required',
                             'gio_di' => 'required',
                             'gio_den' => 'required',

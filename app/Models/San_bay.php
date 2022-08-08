@@ -22,7 +22,7 @@ class San_bay extends Model
                 ->select($this->fillable)
                 ->where('trash_sb', '=', 0)
                 ->orderByDesc('id');
-            if ($param['keyword']) {
+            if (!empty($param['keyword'])) {
                 $query = $query->where(function ($q) use ($param) {
                     $q->orwhere('ten_sb', 'like', '%' . $param['keyword'] . '%');
                     $q->orwhere('dia_chi_sb', 'like', '%' . $param['keyword'] . '%');
@@ -42,7 +42,7 @@ class San_bay extends Model
                 });
             }
 
-            $list_sb = $query->paginate($perPage);
+            $list_sb = $query->paginate($perPage)->withQueryString();
         }
         // dd($list_sb);
         return  $list_sb;

@@ -134,7 +134,7 @@
                                         <td>
                                            
                                             <img id=""
-                                                src="{{ $item->anh_sb ? '' . Storage::url($item->anh_sb) : 'http://placehold.it/100x100' }}"
+                                                src="{{ Storage::url($item->anh_sb)  }}"
                                                 alt="your image"
                                                 style="max-width: 200px; height:100px; margin-bottom: 10px;"
                                                 class="img-responsive" />

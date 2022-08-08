@@ -66,6 +66,16 @@
                 </div>
                 <div class="col-6">
 
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Giờ đi</label>
+                        <input value="{{ old('gio_di') ?? $objItem->gio_di }}" type="datetime-local" name="gio_di"
+                            class="form-control" id="">
+                        @error('gio_di')
+                            <span style="color: red"> {{ $message }} </span>
+                        @enderror
+                    </div>
+
                     <div class="mb-3">
                         <label for="" class="form-label">Giờ đến</label>
                         <input value="{{ old('gio_den') ?? $objItem->gio_den }}" type="datetime-local" name="gio_den"
@@ -74,6 +84,17 @@
                             <span style="color: red"> {{ $message }} </span>
                         @enderror
                     </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Ảnh</label><br>
+                        <img id="anh_chuyen_bay" src=" {{ Storage::url($objItem->anh_chuyen_bay) }}" alt="">
+                        <input id="anh_update" value="" type="file" name="anh_chuyen_bay" class="form-control" id="">
+                        @error('anh_chuyen_bay')
+                            <span style="color: red"> {{ $message }} </span>
+                        @enderror
+                    </div>
+
+
 
                     <div class="mb-3">
                         <label for="" class="form-label">Máy bay </label>
@@ -99,4 +120,26 @@
             </div>
         </form>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $(function() {
+            function readURL(input, selector) {
+                if (input.files && input.files[0]) {
+                    let reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $(selector).attr('src', e.target.result);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#anh_update").change(function() {
+                readURL(this, '#anh_chuyen_bay');
+            });
+
+        });
+    </script>
 @endsection

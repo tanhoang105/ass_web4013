@@ -22,8 +22,7 @@
 @endsection
 
 @section('action_form')
-
-    {{route('admin-index')}}
+    {{ route('admin-index') }}
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -46,7 +45,7 @@
                                         <img src="assets/admin/images/svg/color-palette.svg" alt="">
                                         <div class="flex-1 ms-3">
                                             <h4>Tổng Chuyến Bay</h4>
-                                            <span>{{ $list_cb->count() }}</span>
+                                            <span>{{ $tong_cb->count() }}</span>
                                         </div>
                                     </div>
                                     <a href="javascript:void(0);"><i class="las la-angle-right text-primary"></i></a>
@@ -106,7 +105,9 @@
             </div>
         </div>
         <div class="widget-heading d-flex justify-content-between align-items-center">
-            <h3 class="m-0">All Courses</h3>
+            <h3 class="m-0"> <a href="{{ route('route_BE_Admin_Loc_Chuyen_Bay') }}" class="btn btn-success btn-sm">Lọc
+                    Chuyến Bay </a>
+            </h3>
             <a href="{{ route('route_BE_Admin_Add_Chuyen_Bay') }}" class="btn btn-primary btn-sm">Thêm Chuyến Bay </a>
         </div>
         <div class="row">
@@ -136,8 +137,9 @@
                             <tr>
                                 <th scope="col">STT</th>
                                 <th scope="col">Mã Chuyến Bay</th>
-                                <th scope="col">Giờ Đi</th>
-                                <th scope="col">Giờ Đến</th>
+                                <th scope="col">Ảnh Chuyến Bay</th>
+                                <th scope="col">Thời Gian Đi</th>
+                                <th scope="col">Thời Gian Đến</th>
                                 <th scope="col">Máy Bay</th>
                                 <th scope="col">Sân Bay</th>
                                 <th scope="col">Mô Tả</th>
@@ -147,21 +149,23 @@
                         </thead>
                         <tbody>
                             @if (!empty($list_cb))
-                                @foreach ($list_cb as $key=>$item)
-                        
+                                @foreach ($list_cb as $key => $item)
                                     <tr>
-                                        <th scope="row">{{ $key +  1}}</th>
+                                        <th scope="row">{{ $key + 1 }}</th>
                                         <td>{{ $item->ma_cb }}</td>
+                                        <td><img width="100px" src="{{ Storage::url($item->anh_chuyen_bay) }}" alt=""></td>
                                         <td>{{ $item->gio_di }}</td>
                                         <td>{{ $item->gio_den }}</td>
                                         <td>{{ $item->so_hieu_mb }}</td>
                                         <td>{{ $item->ten_sb }}</td>
-                                        <td class="an">{{ $item->mo_ta_cb }}</td>
+                                        <td class="an">{{ $item->mo_ta_cb == null ? '...' : $item->mo_ta_cb }}</td>
                                         <td>
-                                            <a href="{{ route('route_BE_Admin_Detail_Chuyen_Bay', ['ma_cb' => $item->ma_cb]) }}"><button
+                                            <a
+                                                href="{{ route('route_BE_Admin_Detail_Chuyen_Bay', ['ma_cb' => $item->ma_cb]) }}"><button
                                                     class="btn btn-warning">Chỉnh</button></a>
                                         </td>
-                                        <td><a href="{{ route('route_BE_Admin_Delete_Chuyen_Bay', ['ma_cb' => $item->ma_cb]) }}"><button
+                                        <td><a
+                                                href="{{ route('route_BE_Admin_Delete_Chuyen_Bay', ['ma_cb' => $item->ma_cb]) }}"><button
                                                     class="btn btn-danger">Xóa</button></a></td>
 
                                     </tr>

@@ -27,7 +27,7 @@ class Dat_ve extends Model
                     $q->orWhere('ma_ve', 'like', '%' . $params['keyword']  . '%');
                 });
             }
-            $list_dv = $query->paginate($perpage);
+            $list_dv = $query->paginate($perpage)->withQueryString();
         } else {
             $query  = DB::table($this->table)
                 ->join('ve', 've.id', '=', $this->table . '.ve_id')
