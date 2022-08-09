@@ -8,6 +8,9 @@ use App\Models\Users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderShipped;
+
 
 class LoginController extends Controller
 {
@@ -21,7 +24,7 @@ class LoginController extends Controller
     }
     public function index()
     {
-
+        // Mail::to("hoangnhattan2k2@gmail.com")->send(new OrderShipped(['ma'=>'1232311']));
         return view('login.dangnhap');
     }
 

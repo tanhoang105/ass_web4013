@@ -4,12 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ChuyenBayRequest;
+use App\Mail\OrderShipped;
 use App\Models\Chuyen_bay;
 use App\Models\May_bay;
 use App\Models\San_bay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
+
 
 class AdminController extends Controller
 {
@@ -26,7 +30,15 @@ class AdminController extends Controller
         $this->may_bay =  new May_bay();
     }
     public function index(Request $request)
+
+    
     {
+        $email = Auth::user();
+        $email =  $email->email;
+        // dd($email);
+        // $ma = ramdom();
+        Mail::to($email)->send(new OrderShipped(['ma'=> 123]));
+
         // show ra giao diện admin
         $title_page = 'Trang quản trị';
         $this->v['title_page'] = $title_page;
