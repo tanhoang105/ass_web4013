@@ -140,9 +140,11 @@
                                 <th scope="col">Ảnh Chuyến Bay</th>
                                 <th scope="col">Thời Gian Đi</th>
                                 <th scope="col">Thời Gian Đến</th>
+                                <th scope="col">Nơi Đi</th>
+                                <th scope="col">Nơi Đến</th>
                                 <th scope="col">Máy Bay</th>
                                 <th scope="col">Sân Bay</th>
-                                <th scope="col">Mô Tả</th>
+                               
                                 <th scope="col">Chỉnh Sửa</th>
                                 <th scope="col">Xóa</th>
                             </tr>
@@ -156,9 +158,10 @@
                                         <td><img width="100px" src="{{ Storage::url($item->anh_chuyen_bay) }}" alt=""></td>
                                         <td>{{ $item->gio_di }}</td>
                                         <td>{{ $item->gio_den }}</td>
+                                        <td>{{ $item->noi_di_cb }}</td>
+                                        <td>{{ $item->noi_den_cb }}</td>
                                         <td>{{ $item->so_hieu_mb }}</td>
                                         <td>{{ $item->ten_sb }}</td>
-                                        <td class="an">{{ $item->mo_ta_cb == null ? '...' : $item->mo_ta_cb }}</td>
                                         <td>
                                             <a
                                                 href="{{ route('route_BE_Admin_Detail_Chuyen_Bay', ['ma_cb' => $item->ma_cb]) }}"><button

@@ -40,8 +40,8 @@ Route::get('/logout', [LoginController::class, 'Logout'])->name('route_logout');
 
 Route::middleware(['auth'])->group(function () {
 
-     Route::get('/admin', [AdminController::class, 'index'])->name('admin-index');
      // chuyến bay
+     Route::get('/admin', [AdminController::class, 'index'])->name('admin-index');
      Route::match(['get', 'post'], '/admin-add-chuyen-bay', [AdminController::class, 'add_ChuyenBay'])->name('route_BE_Admin_Add_Chuyen_Bay');
      Route::get('/admin-detail-chuyen-bay/{ma_cb}', [AdminController::class, 'detail_ChuyenBay'])->name('route_BE_Admin_Detail_Chuyen_Bay');
      Route::post('/admin-update-chuyen-bay', [AdminController::class, 'edit_ChuyenBay'])->name('route_BE_Admin_Update_Chuyen_Bay');

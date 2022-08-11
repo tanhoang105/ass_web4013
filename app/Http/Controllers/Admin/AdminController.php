@@ -31,13 +31,15 @@ class AdminController extends Controller
     }
     public function index(Request $request)
 
-    
+
     {
         $email = Auth::user();
         $email =  $email->email;
         // dd($email);
         // $ma = ramdom();
-        Mail::to($email)->send(new OrderShipped(['ma'=> 123]));
+
+        // gửi mail 
+        // Mail::to($email)->send(new OrderShipped(['ma'=> 123]));
 
         // show ra giao diện admin
         $title_page = 'Trang quản trị';
@@ -57,49 +59,46 @@ class AdminController extends Controller
     public function add_ChuyenBay(ChuyenBayRequest $request)
     {
 
+
+        // dd(123);
         $title_page = 'Trang thêm chuyến bay';
         $this->v['extParams']  = $request->all();
         $this->v['list_sb'] = $this->san_bay->list_sb($this->v['extParams'], false);
         $this->v['list_mb'] = $this->may_bay->list_mb($this->v['extParams'], false);
         // dd($this->v['list_sb']);
         $this->v['title_page'] = $title_page;
+        if ($request->isMethod('POST')) {
 
-        if ($request->isMethod('post')) {
+            // dd(2134);
+            // nếu ấn submit
+            $params  = [];
 
-            $params = [];
-            // dd($request->post());
+            // lọc dữ liệu đầu vào 
             $params['cols'] = array_map(function ($item) {
-                // lọc sạch dữ liệu không có cx đc
-                if ($item == '') {
+                if($item == '') {
                     $item = null;
                 }
-                if (is_string($item)) {
-                    $item = trim($item);
+
+                if(is_string($item)){
+                    $item = $item;
                 }
                 return $item;
             }, $request->post());
+
             unset($params['cols']['_token']);
-            if ($request->file('anh_chuyen_bay')) {
+            if($request->file('anh_chuyen_bay')){
                 $params['cols']['anh_chuyen_bay'] = $this->uploadFile($request->file('anh_chuyen_bay'));
             }
 
-            if ($request->gio_di >  $request->gio_den) {
-                Session::flash('error', 'Thời đi phải trước thời gian đến');
-
-                return redirect()->back();
-            }
-
             $res = $this->chuyen_bay->saveNew($params);
-            if ($res == null) {
-                return redirect()->route('route_BE_Admin_Add_Chuyen_Bay');
-            } elseif ($res > 0) {
-                Session::flash('success', 'Thêm mới thành công chuyến bay');
-            } else {
-                Session::flash('error', 'Lỗi thêm người dùng');
-                return redirect()->route('route_BE_Admin_Add_Chuyen_Bay');
+            if($res == null){
+                Session::flash('error' , 'Thêm chuyên bay không thành công');
+                return back();
+            }else {
+                Session::flash('success' , 'Thêm chuyên bay thành công');
+                return redirect()->route('admin-index');
             }
         }
-
         return view('admin.home.chuyenbay.add_cb', $this->v);
     }
 
@@ -138,7 +137,7 @@ class AdminController extends Controller
             return $item;
         }, $request->post());
         unset($params['cols']['_token']);
-        if(!empty($request->file('anh_chuyen_bay'))){
+        if (!empty($request->file('anh_chuyen_bay'))) {
             $params['cols']['anh_chuyen_bay'] = $this->uploadFile($request->file('anh_chuyen_bay'));
         }
         $res = $this->chuyen_bay->update_cb($ma_cb, $params);

@@ -12,8 +12,7 @@ class Chuyen_bay extends Model
 {
     use HasFactory;
     protected $table = 'chuyen_bay';
-    protected $fillable = ['id', 'ma_cb', 'ngay_di', 'sb_id', 'gio_di', 'gio_den', 'mb_id', 'anh_chuyen_bay' , 'mo_ta_cb', 'trash_cb', 'created_at', 'updated_at'];
-
+    protected $fillable = ['id', 'ma_cb', 'ngay_di', 'sb_id', 'gio_di', 'gio_den', 'noi_di_cb', 'noi_den_cb', 'mb_id', 'anh_chuyen_bay', 'mo_ta_cb', 'trash_cb', 'created_at', 'updated_at'];
 
     public function list_cb($param = [], $pagition = true, $perPage = null)
     {
@@ -32,7 +31,7 @@ class Chuyen_bay extends Model
                 });
             }
 
-            $list = $query->paginate($perPage)->withQueryString();
+            $list = $query->paginate($perPage);
         } else {
 
             $query = DB::table($this->table)
@@ -63,6 +62,7 @@ class Chuyen_bay extends Model
 
         // dd($data);
         $res = DB::table($this->table)->insertGetId($data);
+        // dd($res);
         /// insertGetId sẽ trả về id của bản ghi vừa mới đc insert
         return $res;
     }

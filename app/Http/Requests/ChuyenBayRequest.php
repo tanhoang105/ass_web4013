@@ -24,46 +24,19 @@ class ChuyenBayRequest extends FormRequest
      */
     public function rules()
     {
-
-
-        $rules  = [];
-        $currentAction = $this->route()->getActionMethod();
-
-        // dd($currentAction);
-        // dd($currentAction); // trả về method mà chúng ta đang làm việc ở đây đó chính là function  add_chuyen_bay()
+        $rules = [];
+        $actionCurrent = $this->route()->getActionMethod();
+        // dd($actionCurrent);
         switch ($this->method()) {
-                // trả về post hay get
-
             case 'POST':
-                // $method = $this->method();
-                // dd($method);
-
-                switch ($currentAction) {
-
+                switch ($actionCurrent) {
                     case 'add_ChuyenBay':
+                        $rules  = [
+                            'ma_cb' => 'required | min:4 | unique:chuyen_bay',
+                           
 
-                        $rules = [
-                            'ma_cb' =>  'required | min:3 | unique:chuyen_bay', // duy nhất trong bảng chuyến bay
-                            'sb_id' => 'required',
-                            'gio_di' => 'required',
-                            'gio_den' => 'required',
-                            'mb_id' => 'required',
-
+                            
                         ];
-
-                        break;
-
-                    case 'update_ChuyenBay':
-
-                        $rules = [
-                            'ma_cb' =>  'required | min:3',
-                            'sb_id' => 'required',
-                            'gio_di' => 'required',
-                            'gio_den' => 'required',
-                            'mb_id' => 'required',
-
-                        ];
-
                         break;
 
                     default:
@@ -76,7 +49,6 @@ class ChuyenBayRequest extends FormRequest
 
                 break;
         }
-
         return $rules;
     }
 
@@ -94,11 +66,12 @@ class ChuyenBayRequest extends FormRequest
     {
         return [
             'ma_cb' => 'Mã chuyến bay',
-            'ngay_di' => 'Ngày đi',
             'sb_id' => 'Sân bay',
             'gio_di' => 'Giờ đi',
             'gio_den' => 'Giờ đến',
             'mb_id' => 'Máy bay',
+            'noi_di_cb' => 'Nơi đi',
+            'noi_den_cb' => 'Nơi đến'
         ];
     }
 }

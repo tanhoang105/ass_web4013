@@ -19,7 +19,7 @@
                                     </svg>
                                 </a></span>
 
-                            <input type="text" name="keyword" class="form-control" placeholder="Search here...">
+                            <input type="text" name="keyword" value="{{old('keyword') ?? request()->keyword}}" class="form-control" placeholder="Search here...">
 
                         </div>
                     </form>
