@@ -33,7 +33,12 @@ class ChuyenBayRequest extends FormRequest
                     case 'add_ChuyenBay':
                         $rules  = [
                             'ma_cb' => 'required | min:4 | unique:chuyen_bay',
-                           
+                            'gia_chuyenbay' => 'required',
+                            'noi_di_cb' => 'required',
+                            'noi_di_den' => 'required',
+                            'gio_di' => 'required',
+                            'gio_den' => 'required',
+                            'mb_id' => 'required'
 
                             
                         ];
@@ -66,6 +71,7 @@ class ChuyenBayRequest extends FormRequest
     {
         return [
             'ma_cb' => 'Mã chuyến bay',
+            'gia_chuyenbay' => 'Giá chuyến bay',
             'sb_id' => 'Sân bay',
             'gio_di' => 'Giờ đi',
             'gio_den' => 'Giờ đến',

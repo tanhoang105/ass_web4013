@@ -28,6 +28,17 @@
                          @enderror
 
                      </div>
+
+                     <div class="mb-3">
+                        <label for="chuyenBay" class="form-label">Giá</label>
+                        <input value="{{ old('gia_chuyenbay') }}" type="text" name="gia_chuyenbay" class="form-control"
+                            id="chuyenBay" aria-describedby="emailHelp">
+                        @error('gia_chuyenbay')
+                            <span style="color: red"> {{ $message }} </span>
+                        @enderror
+
+                    </div>
+
                      <div class="mb-3">
                          <label for="" class="form-label">Nơi đi</label>
                          <input value="{{ old('noi_di_cb') }}" type="text" name="noi_di_cb" class="form-control"

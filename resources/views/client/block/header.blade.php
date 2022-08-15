@@ -55,15 +55,15 @@ $objUser = \Illuminate\Support\Facades\Auth::user();
                         </div>
                         <div class="header-action d-none d-md-block">
                             <ul>
-                               
+
                                 @if (!isset($objUser))
-                                    <li class="header-btn "><a href="{{ route('route_BE_SignIn') }}"
+                                    <li class="header-btn "><a href="{{ route('route_SignIn') }}"
                                             class="btn">Register</a></li>
                                     <li class="header-btn sign-in"><a href="{{ route('login') }}"
                                             class="btn">LoginIn</a>
                                     </li>
                                 @else
-                                    <li class="header-btn"><a href="{{ route('route_BE_SignIn') }}" class="btn">
+                                    <li class="header-btn"><a href="{{ route('route_SignIn') }}" class="btn">
                                             {{ $objUser->name }}</a></li>
                                     <li class="header-btn sign-in"><a href="{{ route('route_logout') }}"
                                             class="btn">Logout</a>
@@ -72,12 +72,9 @@ $objUser = \Illuminate\Support\Facades\Auth::user();
                                     @if ($objUser->role_id == 2)
                                         <li class="header-btn sign-up"><a href="{{ route('admin-index') }}"
                                                 class="btn ">Quản Trị</a></li>
-                                        
                                     @endif
 
                                 @endif
-
-
 
                             </ul>
                         </div>

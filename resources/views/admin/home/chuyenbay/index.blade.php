@@ -136,15 +136,15 @@
                         <thead>
                             <tr>
                                 <th scope="col">STT</th>
-                                <th scope="col">Mã Chuyến Bay</th>
+                                <th scope="col">Mã </th>
+                                <th scope="col">Giá </th>
                                 <th scope="col">Ảnh Chuyến Bay</th>
                                 <th scope="col">Thời Gian Đi</th>
                                 <th scope="col">Thời Gian Đến</th>
                                 <th scope="col">Nơi Đi</th>
                                 <th scope="col">Nơi Đến</th>
                                 <th scope="col">Máy Bay</th>
-                                <th scope="col">Sân Bay</th>
-                               
+                                <th scope="col">Sân Bay</th>   
                                 <th scope="col">Chỉnh Sửa</th>
                                 <th scope="col">Xóa</th>
                             </tr>
@@ -155,6 +155,7 @@
                                     <tr>
                                         <th scope="row">{{ $key + 1 }}</th>
                                         <td>{{ $item->ma_cb }}</td>
+                                        <td>{{ number_format($item->gia_chuyenbay, 0, '.', '.') }}</td>
                                         <td><img width="100px" src="{{ Storage::url($item->anh_chuyen_bay) }}" alt=""></td>
                                         <td>{{ $item->gio_di }}</td>
                                         <td>{{ $item->gio_den }}</td>

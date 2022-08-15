@@ -69,13 +69,16 @@ class LoginController extends Controller
 
             $res = $this->user->saveNew($params);
             if ($res == null) {
-                return redirect()->route('route_BE_SignIn');
+                return redirect()->route('route_SignIn');
             } elseif ($res > 0) {
-                Session::flash('success', 'Thêm mới thành công người dùng');
-                return redirect()->route('client-index');
+                
+                if (Auth::attempt(['email' => $params['cols']['email'], 'password' => $params['cols']['password'], ])) {
+                    return redirect()->route('client-index' , $this->v);
+                } 
+                
             } else {
                 Session::flash('error', 'Thêm mới không thành công người dùng');
-                return redirect()->route('route_BE_SignIn');
+                return redirect()->route('route_SignIn');
             }
             // }
         }

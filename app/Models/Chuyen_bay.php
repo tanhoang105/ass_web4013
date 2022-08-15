@@ -12,7 +12,7 @@ class Chuyen_bay extends Model
 {
     use HasFactory;
     protected $table = 'chuyen_bay';
-    protected $fillable = ['id', 'ma_cb', 'ngay_di', 'sb_id', 'gio_di', 'gio_den', 'noi_di_cb', 'noi_den_cb', 'mb_id', 'anh_chuyen_bay', 'mo_ta_cb', 'trash_cb', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'ma_cb', 'gia_chuyenbay',  'ngay_di', 'sb_id', 'gio_di', 'gio_den', 'noi_di_cb', 'noi_den_cb', 'mb_id', 'anh_chuyen_bay', 'mo_ta_cb', 'trash_cb', 'created_at', 'updated_at'];
 
     public function list_cb($param = [], $pagition = true, $perPage = null)
     {
@@ -25,13 +25,42 @@ class Chuyen_bay extends Model
                 ->where($this->table . '.trash_cb', '=', 0)
                 ->orderByDesc($this->table . '.id');
 
-            if (!empty($param['keyword'])) {
-                $query  = $query->where(function ($q) use ($param) {
-                    $q->orWhere('ma_cb', 'like', '%' . $param['keyword'] . '%');
-                });
+            if (!empty($param)) {
+                if (!empty($param['keyword'])) {
+                    $query  = $query->where(function ($q) use ($param) {
+                        $q->orWhere('ma_cb', 'like', '%' . $param['keyword'] . '%');
+                    });
+                }
+
+
+                if (!empty($param['noi_di_cb']) || !empty($param['noi_den_cb'])) {
+                    $query  = $query->where(function ($q) use ($param) {
+                        $q->orWhere('noi_di_cb', 'like', '%' . $param['noi_di_cb'] . '%')
+                        ->where('noi_den_cb', 'like', '%' . $param['noi_den_cb'] . '%');
+                    });
+                };
+
+                if (!empty($param['gio_di']) || !empty($param['gio_den'])) {
+                    $query  = $query->where(function ($q) use ($param) {
+                        $q->orWhere('gio_di', 'like', '%' . $param['gio_di'] . '%')
+                            ->Where('gio_den', 'like', '%' . $param['gio_den'] . '%');
+                    });
+                }
+
+                if (!empty($param['gia_chuyenbay'])) {
+                    $query  = $query->where(function ($q) use ($param) {
+                        $q->orWhere('gia_chuyenbay', 'like', '%' . $param['gia_chuyenbay'] . '%');
+                    });
+                }
+
+                // dd($param);
             }
 
-            $list = $query->paginate($perPage);
+
+
+            $list = $query->paginate($perPage)->withQueryString();
+
+            // dd($list[0]);
         } else {
 
             $query = DB::table($this->table)

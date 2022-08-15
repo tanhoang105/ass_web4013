@@ -72,7 +72,7 @@
                             <div class="details">
                                 <h3>Create An Cccount
                                 </h3>
-                                <form action="{{ route('route_BE_SignIn') }}" method="post">
+                                <form action="{{ route('route_SignIn') }}" method="post">
                                     @csrf
                                     <div class="form-group clearfix">
                                         <input name="name" type="text" class="form-control"

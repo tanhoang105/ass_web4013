@@ -121,7 +121,7 @@
                                 </form>
                                 <div class="clearfix"></div>
                             </div>
-                            <p>Don't have an account? <a href="{{ route('route_BE_SignIn') }} " class="thembo"> Register
+                            <p>Don't have an account? <a href="{{ route('route_SignIn') }} " class="thembo"> Register
                                     here</a></p>
                         </div>
                     </div>

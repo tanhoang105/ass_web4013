@@ -11,7 +11,7 @@ class Ve extends Model
 {
     use HasFactory;
     protected $table = 've';
-    protected $fillable = ['id', 'ma_ve', 'cb_id', 'so_ghe', 'gia_ve', 'loai_ve', 'khu_hoi', 'mo_ta_ve', 'trash_ve', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'ma_ve', 'cb_id', 'so_ghe', 'gia_ve', 'gio_di_ve', 'gio_den_ve', 'mo_ta_ve', 'trash_ve', 'created_at', 'updated_at'];
 
     public function list_ve($param =  null, $pagination = true, $perPage =  null, $type  = null)
     {
@@ -53,10 +53,12 @@ class Ve extends Model
         return $query;
     }
 
-    public function add_ve($param,)
+    public function add_ve($param)
     {
         $data = array_merge($param['cols'], [
-            'created_at' => date('Y-m-d H:i:s')
+            'ma_ve' => 'VE' . date('Ymdhis'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'so_ghe' => 'GH' . rand(1 , 500)
         ]);
 
         $query = DB::table($this->table)->insertGetId($data);

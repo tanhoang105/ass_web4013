@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DatVeController;
+use App\Http\Controllers\Admin\KhachHangController;
 use App\Http\Controllers\Admin\LoaiMayBayController;
 use App\Http\Controllers\Admin\MaybayController;
 use App\Http\Controllers\Admin\SanBayController;
@@ -30,7 +31,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'postLogin']);
-Route::match(['get', 'post'], '/dang-ky', [LoginController::class, 'add_User'])->name('route_BE_SignIn');
+
+// khách hàng
+Route::match(['get', 'post'], '/dang-ky', [LoginController::class, 'add_User'])->name('route_SignIn');
 Route::get('/quen-mat-khau', [LoginController::class, 'quen_MK'])->name('route_BE_Forgot_Password');
 
 Route::get('/logout', [LoginController::class, 'Logout'])->name('route_logout');
@@ -104,19 +107,25 @@ Route::middleware(['auth'])->group(function () {
 
      Route::get('/admin-list-san-bay',  [SanBayController::class, 'index'])->name('route_BE_Admin_List_San_Bay');
      Route::get('/admin-delete-san-bay/{id}',  [SanBayController::class, 'delete_SanBay'])->name('route_BE_Admin_Delete_San_Bay');
-     Route::match(['get' , 'post'], '/admin-add-san-bay' , [SanBayController::class , 'add_SanBay'])->name('route_BE_Admin_Add_San_Bay');
-     Route::get('/add-detail-san-bay/{id}' , [SanBayController::class , 'detail_SanBay'])->name('route_BE_Admin_Detail_San_Bay');
-     Route::post('/admin-update-san-bay', [SanBayController::class , 'update_SanBay'])->name('route_BE_Admin_Update_San_Bay');
-     
+     Route::match(['get', 'post'], '/admin-add-san-bay', [SanBayController::class, 'add_SanBay'])->name('route_BE_Admin_Add_San_Bay');
+     Route::get('/add-detail-san-bay/{id}', [SanBayController::class, 'detail_SanBay'])->name('route_BE_Admin_Detail_San_Bay');
+     Route::post('/admin-update-san-bay', [SanBayController::class, 'update_SanBay'])->name('route_BE_Admin_Update_San_Bay');
 });
 
 
 // client
 
 Route::get('/', [ClientController::class, 'index'])->name('client-index');
+Route::post('/dat_ve', [ClientController::class, 'dat_ve'])->name('route_FE_Client_Dat_Ve');
+
+
+
 Route::get('/about', [ClientController::class, 'about'])->name('about');
 Route::get('/contact', [ClientController::class, 'contact'])->name('contact');
 Route::get('/blog', [ClientController::class, 'blog'])->name('blog');
 Route::get('/blog-detail', [ClientController::class, 'blog_detail'])->name('blog-detail');
 Route::get('/booking-list', [ClientController::class, 'booking_list'])->name('booking-list');
 Route::get('/booking-detail', [ClientController::class, 'booking_detail'])->name('booking-detail');
+
+
+// CLient đặt vé 

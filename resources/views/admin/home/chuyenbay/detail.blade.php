@@ -37,6 +37,17 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="chuyenBay" class="form-label">Giá</label>
+                        <input value="{{ old('gia_chuyenbay') ?? $objItem->gia_chuyenbay }}" type="text" name="gia_chuyenbay" class="form-control"
+                            id="chuyenBay" aria-describedby="emailHelp">
+                        @error('gia_chuyenbay')
+                            <span style="color: red"> {{ $message }} </span>
+                        @enderror
+
+                    </div>
+
+                    {{-- đây là phân san bay đi đã đc chuyên thành nơi đi --}}
+                    {{-- <div class="mb-3">
                         <label for="" class="form-label">Sân bay đi</label>
                         <select name="sb_id" id="" class="form-control">
                             <option value="">Sân bay đi</option>
@@ -59,10 +70,30 @@
 
                         </div>
 
+                    </div> --}}
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Nơi đi</label>
+                        <input value="{{ old('noi_di_cb') ?? $objItem->noi_di_cb }}" type="text" name="noi_di_cb" class="form-control"
+                            id="" aria-describedby="emailHelp">
+                        @error('noi_di_cb')
+                            <span style="color: red"> {{ $message }} </span>
+                        @enderror
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Nơi đến</label>
+                        <input value="{{ old('noi_den_cb') ?? $objItem->noi_den_cb }}" type="text" name="noi_den_cb" class="form-control"
+                            id="" aria-describedby="emailHelp">
+                        @error('noi_den_cb')
+                            <span style="color: red"> {{ $message }} </span>
+                        @enderror
+
                     </div>
 
 
-                    <button type="submit" class="btn btn-success">Cập nhập sản phẩm</button>
+                    <button type="submit" class="btn btn-success">Cập nhập chuyến bay</button>
                 </div>
                 <div class="col-6">
 
@@ -85,10 +116,13 @@
                         @enderror
                     </div>
 
+
+
                     <div class="mb-3">
                         <label for="" class="form-label">Ảnh</label><br>
                         <img id="anh_chuyen_bay" src=" {{ Storage::url($objItem->anh_chuyen_bay) }}" alt="">
-                        <input id="anh_update" value="" type="file" name="anh_chuyen_bay" class="form-control" id="">
+                        <input id="anh_update" value="" type="file" name="anh_chuyen_bay" class="form-control"
+                            id="">
                         @error('anh_chuyen_bay')
                             <span style="color: red"> {{ $message }} </span>
                         @enderror

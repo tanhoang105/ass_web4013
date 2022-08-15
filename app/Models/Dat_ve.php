@@ -58,11 +58,22 @@ class Dat_ve extends Model
             $query = DB::table($this->table)
                 ->where('ma_dat_ve', '=', $ma_dv)
                 ->update($data);
-                // dd(123);
+            // dd(123);
             return $query;
         } else {
             Session::flash('error', 'Xóa không thành công');
             return redirect()->route('route_BE_Admin_List_Dat_Ve');
         }
+    }
+
+    public function add_dat_ve($params)
+    {
+        $data = array_merge($params['cols'], [
+            'ma_dat_ve' => 'DV' . date('Ymdhis')
+        ]);
+        // dd($data);
+        $res =  DB::table($this->table)
+            ->insertGetId($data);
+        return $res;
     }
 }
