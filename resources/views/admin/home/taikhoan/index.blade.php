@@ -86,7 +86,7 @@
         </div>
         <div class="widget-heading d-flex justify-content-between align-items-center">
             <h3 class="m-0">All Courses</h3>
-            {{-- <a href="" class="btn btn-primary btn-sm">Thêm TK </a> --}}
+            <a href=" {{route('route_BE_Admin_Add_Tai_Khoan')}} " class="btn btn-primary btn-sm">Thêm Thành Viên </a>
         </div>
         <div class="row">
             <div class="col-xl-12 col-md-12">

@@ -451,8 +451,10 @@
                                                 </div>
                                             </div>
                                             <div class="overlay-content">
-                                                <button type="submit" style=" height: 30px;"
+                                                <button type="submit" style=" "
                                                     class="btn btn-primary">Đặt Vé</button>
+                                                    <p>Sân bay :  {{ $item->ten_sb}}</p>
+                                                    <p></p>
                                             </div>
                                         </div>
 

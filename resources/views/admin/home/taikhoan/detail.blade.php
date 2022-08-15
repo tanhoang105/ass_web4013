@@ -16,13 +16,13 @@
 
             </div>
         @endif
-        <form action=" {{ route('route_BE_Admin_Add_Tai_Khoan') }} " method="post" enctype="multipart/form-data">
+        <form action=" {{ route('route_BE_Admin_Update_Tai_Khoan') }} " method="post" enctype="multipart/form-data">
             <div class="row">
                 @csrf
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="chuyenBay" class="form-label">Tên tài khoản </label>
-                        <input value="{{ old('name') }}" type="text" name="name" class="form-control" id="chuyenBay"
+                        <input value="{{ old('name') ?? $taikhoan->name }}" type="text" name="name" class="form-control" id="chuyenBay"
                             aria-describedby="emailHelp">
                         @error('name')
                             <span style="color: red"> {{ $message }} </span>
@@ -32,7 +32,7 @@
 
                     <div class="mb-3">
                         <label for="" class="form-label">Email</label>
-                        <input value="{{ old('email') }}" type="email" name="email" class="form-control"
+                        <input value="{{ old('email') ?? $taikhoan->email }}" type="email" name="email" class="form-control"
                             id="">
                     </div>
                     @error('email')
@@ -50,7 +50,7 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="" class="form-label">Mật khẩu</label>
-                        <input value="{{ old('password') }}" type="text" name="password" class="form-control"
+                        <input  value="{{ old('password')   }}" type="password" name="password" class="form-control"
                             id="">
                     </div>
                     @error('password')
@@ -64,8 +64,8 @@
 
                             @if (!empty($list_role))
                                 @foreach ($list_role as $item)
-                                    <option value="{{ $item->id ?? old('cb_id') }} ">
-                                        {{ $item->ten_role }}</option>
+                                    <option value="{{ $item->id ?? old('cb_id') ?? $taikhoan->role_id }}" {{ $item->id == $taikhoan->role_id ? 'selected' : false}}>
+                                        {{ $item->ten_role ?? $taikhoan->ten_role }}</option>
                                 @endforeach
                             @endif
                         </select>

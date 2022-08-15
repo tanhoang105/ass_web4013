@@ -103,6 +103,7 @@ class ClientController extends Controller
         // tìm chuyến bay theo mã để lấy ra id -> insert vào bảng ve
         $res_Chuyenbay =  $this->chuyenbay->loadOne($params['cols']['ma_cb']);
         $id_chuyen_bay = $res_Chuyenbay->id;
+        $ngay_het_han = $res_Chuyenbay->gio_den;
         // dd($id_chuyen_bay);
 
 
@@ -118,7 +119,9 @@ class ClientController extends Controller
             $paramsDV = [];
             $paramsDV['cols'] = [
                 've_id' => $resVe,
-                'kh_id' => $id_account
+                'kh_id' => $id_account,
+                'ngay_het_han' => $ngay_het_han
+
             ];
 
             // dd($paramsDV);

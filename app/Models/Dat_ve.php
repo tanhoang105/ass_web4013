@@ -11,7 +11,7 @@ class Dat_ve extends Model
 {
     use HasFactory;
     protected $table = 'dat_ve';
-    protected $fillable = ['id', 'ma_ve', 've_id', 'kh_id', 'mo_ta_dat_ve', 'trash_dat_ve', 'created_at', 'updated_at'];
+    protected $fillable = ['id', 'ma_ve', 've_id', 'kh_id', 'ngay_het_han' , 'mo_ta_dat_ve', 'trash_dat_ve', 'created_at', 'updated_at'];
 
     public function list_dv($pagination = true, $params = null, $perpage = null)
     {
@@ -19,19 +19,22 @@ class Dat_ve extends Model
             // phân trang 
             $query  = DB::table($this->table)
                 ->join('ve', 've.id', '=', $this->table . '.ve_id')
-                ->join('khach_hang', 'khach_hang.id',  '=', $this->table . '.kh_id')
+                ->join('users', 'users.id',  '=', $this->table . '.kh_id')
+                ->select($this->table . '.*', 've.*', 'users.*')
                 ->where($this->table . '.trash_dat_ve', '=', 0)
                 ->orderByDesc($this->table . '.id');
             if (!empty($params['keyword'])) {
                 $query =  $query->where(function ($q) use ($params) {
-                    $q->orWhere('ma_ve', 'like', '%' . $params['keyword']  . '%');
+                    $q->orWhere($this->table . '.ma_ve', 'like', '%' . $params['keyword']  . '%');
                 });
             }
             $list_dv = $query->paginate($perpage)->withQueryString();
+            // dd($list_dv[0]);
         } else {
             $query  = DB::table($this->table)
                 ->join('ve', 've.id', '=', $this->table . '.ve_id')
-                ->join('khach_hang', 'khach_hang.id',  '=', $this->table . '.kh_id')
+                ->join('users', 'users.id',  '=', $this->table . '.kh_id')
+                ->select($this->table . '.*', 've.*', 'users.*')
                 ->where($this->table . '.trash_dat_ve', '=', 0)
                 ->orderByDesc($this->table . '.id');
 
@@ -75,5 +78,14 @@ class Dat_ve extends Model
         $res =  DB::table($this->table)
             ->insertGetId($data);
         return $res;
+    }
+
+
+    public function loc_dat_ve()
+    {
+        $query = DB::table($this->table)
+            ->where('ngay_het_han', '<', date('Y-m-d h:i:s'))
+            ->update(['trash_dat_ve' => 1]);
+        return $query;
     }
 }

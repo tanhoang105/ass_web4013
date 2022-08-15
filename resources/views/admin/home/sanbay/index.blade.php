@@ -117,7 +117,6 @@
                                 <th scope="col">Tên sân bay</th>
                                 <th scope="col">Địa chỉ sân bay</th>
                                 <th scope="col">Ảnh sân bay</th>
-                                <th scope="col">Loại sân bay</th>
                                 <th scope="col">Mô Tả Bay</th>
                                 <th scope="col">Chỉnh</th>
                                 <th scope="col">Xóa</th>
@@ -139,7 +138,6 @@
                                                 style="max-width: 200px; height:100px; margin-bottom: 10px;"
                                                 class="img-responsive" />
                                         </td>
-                                        <td> {{ $item->loai_sb == 0 ? 'Sân bay đi' : 'Sân bay đến' }} </td>
                                         <td>{{ $item->mo_ta_sb }}</td>
 
                                         <td>

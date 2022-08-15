@@ -93,4 +93,12 @@ class Ve extends Model
             ->update($dataUpdate);
         return $res;
     }
+
+    public function loc_ve()
+    {
+        $query = DB::table($this->table)
+            ->where('gio_den_ve', '<', date('Y-m-d h:i:s'))
+            ->update(['trash_ve' => 1]);
+        return $query;
+    }
 }

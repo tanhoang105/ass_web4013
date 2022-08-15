@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\CssSelector\XPath\Extension\FunctionExtension;
+use App\Rules\ChuyenBayRule;
+
 
 class ChuyenBayRequest extends FormRequest
 {
@@ -32,15 +34,14 @@ class ChuyenBayRequest extends FormRequest
                 switch ($actionCurrent) {
                     case 'add_ChuyenBay':
                         $rules  = [
-                            'ma_cb' => 'required | min:4 | unique:chuyen_bay',
+                            'ma_cb' => ' min:4 | unique:chuyen_bay',
                             'gia_chuyenbay' => 'required',
+                            'giam_gia_cb' => 'required',
                             'noi_di_cb' => 'required',
-                            'noi_di_den' => 'required',
-                            'gio_di' => 'required',
-                            'gio_den' => 'required',
+                            'noi_den_cb' => 'required',
+                            'gio_di' => ['required'],
+                            'gio_den' =>  ['required', new  ChuyenBayRule],
                             'mb_id' => 'required'
-
-                            
                         ];
                         break;
 
@@ -72,6 +73,7 @@ class ChuyenBayRequest extends FormRequest
         return [
             'ma_cb' => 'Mã chuyến bay',
             'gia_chuyenbay' => 'Giá chuyến bay',
+            'giam_gia_cb' => 'Giảm giá',
             'sb_id' => 'Sân bay',
             'gio_di' => 'Giờ đi',
             'gio_den' => 'Giờ đến',

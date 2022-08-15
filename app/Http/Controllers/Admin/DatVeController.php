@@ -24,6 +24,7 @@ class DatVeController extends Controller
         $this->v['extParams'] = $request->all();
         $list_dv = $this->datve->list_dv(true, $this->v['extParams'], 2);
         $this->v['list_dv'] = $list_dv;
+        // dd($list_dv[0]);
 
         return view('admin.home.datve.index', $this->v);
     }
@@ -47,4 +48,18 @@ class DatVeController extends Controller
             return back();
         }
     }
+
+
+      // xóa hết những ve quá hạn
+      public function loc_DatVe()
+      {
+          $res  = $this->datve->loc_dat_ve();
+  
+          if ($res > 0) {
+              Session::flash('success', 'Lọc thành công');
+          } else {
+              Session::flash('error', 'Lọc không thành công');
+          }
+          return back();
+      }
 }

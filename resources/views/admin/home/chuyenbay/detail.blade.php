@@ -16,10 +16,7 @@
         @if (Session::has('success'))
             <div class="alert alert-success alert-dismissible" role="alert">
                 <strong>{{ Session::get('success') }}</strong>
-                {{-- <button type="button" class="close d-flex flex-row-reverse" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    <span class="sr-only flex-rigth">Close</span>
-                </button> --}}
+                
             </div>
         @endif
         <form action="{{ route('route_BE_Admin_Update_Chuyen_Bay') }}" method="post" enctype="multipart/form-data">

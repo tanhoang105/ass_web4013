@@ -67,6 +67,8 @@ class AdminController extends Controller
         $this->v['list_mb'] = $this->may_bay->list_mb($this->v['extParams'], false);
         // dd($this->v['list_sb']);
         $this->v['title_page'] = $title_page;
+
+
         if ($request->isMethod('POST')) {
 
             // dd(2134);
@@ -75,27 +77,36 @@ class AdminController extends Controller
 
             // lọc dữ liệu đầu vào 
             $params['cols'] = array_map(function ($item) {
-                if($item == '') {
+                if ($item == '') {
                     $item = null;
                 }
 
-                if(is_string($item)){
+                if (is_string($item)) {
                     $item = $item;
                 }
                 return $item;
             }, $request->post());
 
             unset($params['cols']['_token']);
-            if($request->file('anh_chuyen_bay')){
+
+
+            if (date($request->gio_di) >  date($request->gio_den)) {
+
+                // Session::flash('msg', 'Giờ đi không lớn hơn giờ đến');
+                // return  redirect()->route('route_BE_Admin_Add_Chuyen_Bay');
+                return back()->with('msg' , 'Giờ đi không lớn hơn giờ đến');
+            }
+
+            if ($request->file('anh_chuyen_bay')) {
                 $params['cols']['anh_chuyen_bay'] = $this->uploadFile($request->file('anh_chuyen_bay'));
             }
 
             $res = $this->chuyen_bay->saveNew($params);
-            if($res == null){
-                Session::flash('error' , 'Thêm chuyên bay không thành công');
+            if ($res == null) {
+                Session::flash('error', 'Thêm chuyên bay không thành công');
                 return back();
-            }else {
-                Session::flash('success' , 'Thêm chuyên bay thành công');
+            } else {
+                Session::flash('success', 'Thêm chuyên bay thành công');
                 return redirect()->route('admin-index');
             }
         }

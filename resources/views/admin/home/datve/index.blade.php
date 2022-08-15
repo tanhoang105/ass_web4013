@@ -86,8 +86,10 @@
             </div>
         </div>
         <div class="widget-heading d-flex justify-content-between align-items-center">
-            <h3 class="m-0">All Courses</h3>
-            <a href="{{ route('route_BE_Admin_Add_Dat_Ve') }}" class="btn btn-primary btn-sm">Thêm Đặt Vé </a>
+           
+            <h3 class="m-0"> <a href="{{ route('route_BE_Admin_Loc_Dat_Ve') }}" class="btn btn-success btn-sm">Lọc Vé Quá Hạn </a>
+        </h3>
+            {{-- <a href="{{ route('route_BE_Admin_Add_Dat_Ve') }}" class="btn btn-primary btn-sm">Thêm Đặt Vé </a> --}}
         </div>
         <div class="row">
             <div class="col-xl-12 col-md-12">
@@ -118,8 +120,8 @@
                                 <th scope="col">Mã Đặt Vé</th>
                                 <th scope="col">Mã Vé</th>
                                 <th scope="col">Tên Khách Hàng</th>
-                                <th scope="col">Mô Tả </th>
-                                <th scope="col">Chỉnh Sửa</th>
+                                <th scope="col">Ngày Hết Hạn</th>
+                                {{-- <th scope="col">Chỉnh Sửa</th> --}}
                                 <th scope="col">Xóa</th>
                             </tr>
                         </thead>
@@ -130,13 +132,13 @@
                                         <th scope="row">{{ $key + 1 }}</th>
                                         <td>{{ $item->ma_dat_ve }}</td>
                                         <td>{{ $item->ma_ve }}</td>
-                                        <td>{{ $item->ten_kh }}</td>
-                                        <td>{{ $item->mo_ta_dat_ve }}</td>
-                                        <td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->ngay_het_han}}</td>
+                                        {{-- <td>
                                             <a
                                                 href="{{ route('route_BE_Admin_Detail_Dat_Ve', ['ma_dat_ve' => $item->ma_dat_ve]) }}"><button
                                                     class="btn btn-warning">Chỉnh</button></a>
-                                        </td>
+                                        </td> --}}
                                         <td><a
                                                 href="{{ route('route_BE_Admin_Delete_Dat_Ve', ['ma_dat_ve' => $item->ma_dat_ve]) }}"><button
                                                     class="btn btn-danger">Xóa</button></a></td>

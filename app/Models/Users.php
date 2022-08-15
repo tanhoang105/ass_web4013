@@ -25,6 +25,8 @@ class Users extends Model
             if (!empty($params['keyword'])) {
                 $query = $query->where(function ($q) use ($params) {
                     $q->orwhere($this->table . '.name', 'like', '%'  . $params['keyword'] . '%');
+                    $q->orwhere($this->table . '.email', 'like', '%'  . $params['keyword'] . '%');
+                    $q->orwhere(  'roles.ten_role', 'like', '%'  . $params['keyword'] . '%');
                 });
             }
             $list = $query->paginate($perpage)->withQueryString();
@@ -74,7 +76,7 @@ class Users extends Model
     {
         $dataUpdate = [];
         foreach ($params['cols'] as $colname =>  $val) {
-            if ($params['cols'] =='id' ) continue;
+            if ($params['cols'] == 'id') continue;
             if (in_array($colname, $this->fillable)) {
                 $dataUpdate[$colname] = (strlen($val) == 0) ? null : $val;
             }
@@ -86,5 +88,29 @@ class Users extends Model
             ->update($dataUpdate);
         // dd($res);
         return $res;
+    }
+
+    public function detail_taikhoan($email)
+    {
+        if (!empty($email)) {
+            $query = DB::table($this->table)
+                ->where('email', '=', $email)
+                ->first();
+            return $query;
+        }
+    }
+
+    public function update_taikhoan($params)
+    {
+       if(!empty($params)){
+            $dataUpdate = array_merge($params['cols'] , []);
+        
+           $res = DB::table($this->table)
+               ->where('email', '=', $params['cols']['email'])
+               ->update($dataUpdate);
+           // dd($res);
+           return $res;
+       }
+
     }
 }

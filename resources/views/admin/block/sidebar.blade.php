@@ -26,18 +26,15 @@ $objItem = \Illuminate\Support\Facades\Auth::user();
 
 
         </li>
-        <li><a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+        <li><a class="has-arrow " href="{{ route('route_BE_Admin_List_Ve') }}" aria-expanded="false">
                 <i class="bi bi-info-circle"></i>
                 <span class="nav-text">Vé</span>
             </a>
-            <ul aria-expanded="false">
-                <li><a href="{{ route('route_BE_Admin_List_Ve') }}">Tất cả vé</a></li>
-                <li><a href="app-profile.html">Bình Dân</a></li>
-                <li><a href="post-details.html">Hạng Sang</a></li>
+            
+                
 
         </li>
-    </ul>
-    </li>
+   
     <li><a class="has-arrow " href="{{ route('route_BE_Admin_List_Slide') }}" aria-expanded="false">
             <i class="bi bi-pie-chart"></i>
             <span class="nav-text">Slide</span>

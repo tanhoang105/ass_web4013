@@ -118,6 +118,19 @@ class VeController extends Controller
         }
     }
 
+    // xóa hết những vé quá hạn
+    public function loc_Ve()
+    {
+        $res  = $this->ve->loc_ve();
+
+        if ($res > 0) {
+            Session::flash('success', 'Lọc thành công');
+        } else {
+            Session::flash('error', 'Lọc không thành công');
+        }
+        return back();
+    }
+
 
 
 }

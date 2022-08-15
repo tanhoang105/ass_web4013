@@ -86,7 +86,9 @@
         </div>
         <div class="widget-heading d-flex justify-content-between align-items-center">
             <h3 class="m-0">All Courses</h3>
-            <a href="{{ route('route_BE_Admin_Add_Ve') }}" class="btn btn-primary btn-sm">Thêm Vé </a>
+            <h3 class="m-0"> <a href="{{ route('route_BE_Admin_Loc_Ve') }}" class="btn btn-success btn-sm">Lọc Vé  </a>
+
+            {{-- <a href="{{ route('route_BE_Admin_Add_Ve') }}" class="btn btn-primary btn-sm">Thêm Vé </a> --}}
         </div>
         <div class="row">
             <div class="col-xl-12 col-md-12">
@@ -118,10 +120,10 @@
                                 <th scope="col">Chuyến Bay</th>
                                 <th scope="col">Giá vé</th>
                                 <th scope="col">Số ghế</th>
-                                <th scope="col">Loại vé</th>
-                                <th scope="col">Khứ hồi</th>
+                                <th scope="col">Ngày Đi</th>
+                                <th scope="col">Ngày Đến</th>
                                 <th scope="col">Giảm giá </th>
-                                <th scope="col">Mô tả</th>
+                                
                                 <th scope="col">Chỉnh</th>
                                 <th scope="col">Xóa</th>
 
@@ -134,12 +136,11 @@
                                         <th scope="row">{{ $key + 1 }}</th>
                                         <td>{{ $item->ma_ve }}</td>
                                         <td>{{ $item->ma_cb }}</td>
-                                        <td>{{ number_format($item->gia_ve, 0, '.', '.') }}</td>
+                                        <td>{{ $item->gia_ve }}</td>
                                         <td>{{ $item->so_ghe }}</td>
-                                        <td>{{ $item->loai_ve == 0 ? 'Bình thường' : "Hạng sang" }}</td>
-                                        <td>{{ $item->khu_hoi == 0 ? 'vé 1 chiều ' : 'vé 2 chiều' }}</td>
+                                        <td>{{ $item->gio_di_ve }}</td>
+                                        <td>{{ $item->gio_den_ve }}</td>
                                         <td>{{ number_format($item->giam_gia, 0, '.', '.') }}</td>
-                                        <td>{{ $item->mo_ta_ve }}</td>
                                         <td>
                                             <a href=" {{ route('route_BE_Admin_Detail_Ve', ['ma_ve' => $item->ma_ve]) }} "><button
                                                     class="btn btn-warning">Chỉnh</button></a>
