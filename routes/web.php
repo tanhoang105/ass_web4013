@@ -43,7 +43,7 @@ Route::get('/logout', [LoginController::class, 'Logout'])->name('route_logout');
 
 Route::middleware(['auth'])->group(function () {
 
-     
+
 
      // chuyến bay
      Route::get('/admin', [AdminController::class, 'index'])->name('admin-index');
@@ -67,7 +67,7 @@ Route::middleware(['auth'])->group(function () {
      Route::match(['get', 'post'], '/admin-add-loai-may-bay', [LoaiMayBayController::class, 'add_Loai_MB'])->name('route_BE_Admin_Add_Loai_May_Bay');
      Route::get('/admin-detail-loai-may-bay/{id}', [LoaiMayBayController::class, 'detail_Loai_MB'])->name('route_BE_Admin_Detail_Loai_May_Bay');
      Route::post('/admin-update-loai-may-bay', [LoaiMayBayController::class, 'update_Loai_MB'])->name('route_BE_Admin_Update_Loai_May_Bay');
-    
+
      // vé 
      Route::get('/admin-list-ve', [VeController::class, 'index'])->name('route_BE_Admin_List_Ve');
      Route::get('/admin-delete-ve/{ma_ve}', [VeController::class, 'delete_Ve'])->name('route_BE_Admin_Delete_Ve');
@@ -105,10 +105,10 @@ Route::middleware(['auth'])->group(function () {
      Route::get('/admin-tai-khoan', [TaiKhoanController::class, 'index'])->name('route_BE_Admin_List_Tai_Khoan');
      Route::get('/admin-delete-tai-khoan/{email}', [TaiKhoanController::class, 'delete_TaiKhoan'])->name('route_BE_Admin_Delete_Tai_Khoan');
      Route::get('/admin-detail-tai-khoan/{email}', [TaiKhoanController::class, 'detail_TaiKhoan'])->name('route_BE_Admin_Detail_Tai_Khoan');
-     Route::post('/admin-update-tai-khoan'  , [TaiKhoanController::class , 'update_TaiKhoan'])->name('route_BE_Admin_Update_Tai_Khoan');
+     Route::post('/admin-update-tai-khoan', [TaiKhoanController::class, 'update_TaiKhoan'])->name('route_BE_Admin_Update_Tai_Khoan');
 
-     Route::match(['post' , 'get'] , '/admin-add-thanh-vien' , [TaiKhoanController::class , 'add_TaiKhoan'] )->name('route_BE_Admin_Add_Tai_Khoan');
-     
+     Route::match(['post', 'get'], '/admin-add-thanh-vien', [TaiKhoanController::class, 'add_TaiKhoan'])->name('route_BE_Admin_Add_Tai_Khoan');
+
 
 
 
@@ -119,18 +119,24 @@ Route::middleware(['auth'])->group(function () {
      Route::match(['get', 'post'], '/admin-add-san-bay', [SanBayController::class, 'add_SanBay'])->name('route_BE_Admin_Add_San_Bay');
      Route::get('/add-detail-san-bay/{id}', [SanBayController::class, 'detail_SanBay'])->name('route_BE_Admin_Detail_San_Bay');
      Route::post('/admin-update-san-bay', [SanBayController::class, 'update_SanBay'])->name('route_BE_Admin_Update_San_Bay');
+
+     // lịch sử đặt vé 
+     Route::get('/client-lich-su-dat-ve', [ClientController::class, 'ls_DatVe'])->name('route_FE_Client_Lich_Su_Dat_Ve');
 });
 
+Route::middleware('checkAcountDatVe')->group(function () {
+
+     Route::post('/dat_ve', [ClientController::class, 'dat_ve'])->name('route_FE_Client_Dat_Ve');
+});
 
 // client
 
 Route::get('/', [ClientController::class, 'index'])->name('client-index');
-Route::post('/dat_ve', [ClientController::class, 'dat_ve'])->name('route_FE_Client_Dat_Ve');
 
 
 
 Route::get('/about', [ClientController::class, 'about'])->name('about');
-Route::get('/contact', [ClientController::class, 'contact'])->name('contact');
+// Route::get('/contact', [ClientController::class, 'contact'])->name('contact');
 Route::get('/blog', [ClientController::class, 'blog'])->name('blog');
 Route::get('/blog-detail', [ClientController::class, 'blog_detail'])->name('blog-detail');
 Route::get('/booking-list', [ClientController::class, 'booking_list'])->name('booking-list');

@@ -64,6 +64,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'checkAcountDatVe' => \App\Http\Middleware\CheckAcountDatVe::class,
 
         // đăng ký làm giao diện admin
         'Image' => Intervention\Image\Facades\Image::class,

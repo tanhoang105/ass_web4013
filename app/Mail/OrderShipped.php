@@ -29,7 +29,7 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->subject("Trung tâm văn hoá")
+        return $this->subject("Đặt Vé Máy Bay Online")
             ->view('email')
             ->with('emails', $this->email);
     }

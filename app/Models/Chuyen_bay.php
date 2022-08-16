@@ -30,6 +30,8 @@ class Chuyen_bay extends Model
                     $query  = $query->where(function ($q) use ($param) {
                         $q->orWhere('ma_cb', 'like', '%' . $param['keyword'] . '%');
                         $q->orWhere('may_bay.so_hieu_mb', 'like', '%' . $param['keyword'] . '%');
+                        $q->orWhere( $this->table . '.gia_chuyenbay', 'like', '%' . $param['keyword'] . '%');
+                        $q->orWhere( $this->table . '.noi_di_cb', 'like', '%' . $param['keyword'] . '%');
                     });
                 }
 

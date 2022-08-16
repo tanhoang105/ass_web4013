@@ -446,15 +446,15 @@
                                                 <div class="content-bottom">
                                                     <input style="outline: none ; border: none ; text-align: center;"
                                                         type="text" name="gia_ve"
-                                                        value=" {{ number_format($item->gia_chuyenbay, 0, '.', '.') . ' VND/vé' }} ">
+                                                        value=" {{ number_format($item->gia_chuyenbay - $item->giam_gia_cb , 0, '.', '.') . ' VND/vé' }} ">
 
                                                 </div>
                                             </div>
                                             <div class="overlay-content">
+                                                <p style="text-align: center">Sân bay :  {{ $item->ten_sb}}</p>
                                                 <button type="submit" style=" "
                                                     class="btn btn-primary">Đặt Vé</button>
-                                                    <p>Sân bay :  {{ $item->ten_sb}}</p>
-                                                    <p></p>
+                                                
                                             </div>
                                         </div>
 

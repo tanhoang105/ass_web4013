@@ -9,6 +9,8 @@ use App\Models\Ve;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
 
 class ClientController extends Controller
 {
@@ -44,11 +46,7 @@ class ClientController extends Controller
         return view('client.home.about');
     }
 
-    public function contact()
-    {
-        // show ra giao diện admin
-        return view('client.home.contact');
-    }
+
 
     public function blog()
     {
@@ -84,6 +82,7 @@ class ClientController extends Controller
         if ($checkAuth) {
             $account = Auth::user();
             $id_account = $account->id;
+            $email = $account->email;
         }
 
         $this->v['extParams'] = $request->all();
@@ -128,9 +127,26 @@ class ClientController extends Controller
             $resDatVe = $this->dat_ve->add_dat_ve($paramsDV);
 
             if ($resDatVe > 0) {
-                Session::flash('success' , 'Đăt vé thành công');
-                return back();
+                Mail::to($email)->send(new OrderShipped(['ma' => 'Quá khách đã đặt vé thành công']));
+                Session::flash('success', 'Đăt vé thành công');
+                return redirect()->route('route_FE_Client_Lich_Su_Dat_Ve');
             }
         }
+    }
+
+    public function ls_DatVe()
+    {
+
+        // show ra giao diện admin
+        if (Auth::check()) {
+            $account_id =  Auth::user()->id;
+            // dd($account_id);
+        }
+
+        $res  = $this->dat_ve->ls_datve(false, null, null, $account_id);
+        // dd($res);
+        $this->v['info'] = $res;
+
+        return view('client.home.contact', $this->v);
     }
 }

@@ -50,7 +50,9 @@ $objUser = \Illuminate\Support\Facades\Auth::user();
                                         <li><a href="{{ route('blog-detail') }}">Blog Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="{{ route('contact') }}">Contact</a></li>
+                                @if (Auth::check())
+                                    <li><a href="{{ route('route_FE_Client_Lich_Su_Dat_Ve') }}">Lịch sử</a></li>
+                                @endif
                             </ul>
                         </div>
                         <div class="header-action d-none d-md-block">

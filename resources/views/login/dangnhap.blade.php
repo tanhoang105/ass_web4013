@@ -70,7 +70,11 @@
                                 </a>
                             </div>
                             <div class="details">
-                               
+                                @if (Session::has('error'))
+                                    <div class="alert alert-danger alert-dismissible" role="alert">
+                                        <strong>{{ Session::get('error') }}</strong>
+                                    </div>
+                                @endif
                                 <h3>Sign Into Your Account</h3>
                                 <form action="{{ url('/login') }}" method="post">
                                     @csrf
@@ -90,10 +94,8 @@
                                     </div>
                                     <div class="checkbox form-group clearfix">
                                         <div class="form-check float-start">
-                                            <input class="form-check-input" type="checkbox" id="rememberme">
-                                            <label class="form-check-label" for="rememberme">
-                                                Remember me
-                                            </label>
+                                            {{-- <input class="form-check-input" type="checkbox" id="rememberme"> --}}
+
                                         </div>
                                         <a href="{{ route('route_BE_Forgot_Password') }}"
                                             class="link-light float-end forgot-password">Forgot your password?</a>

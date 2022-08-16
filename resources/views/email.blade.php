@@ -7,6 +7,6 @@
      <title>Document</title>
 </head>
 <body>
-     <p>Mã của bạn là {{$emails['ma']}}</p>
+     <p> {{$emails['ma']}}</p>
 </body>
 </html>
